@@ -3,6 +3,9 @@ import {Switch, Route, Link} from 'react-router-dom'
 // Pages
 import Dashboard from "./pages/dashboard/dashboard.page"
 
+// Components
+import Header from "./components/header/header.component"
+
 import './App.css';
 
 function App() {
@@ -18,6 +21,7 @@ function App() {
         </div>
       </div>
       <div className="content">
+        <Header />
         <Switch>
           <Route exact path="/" component={Dashboard} />
         </Switch>
