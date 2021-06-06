@@ -1,0 +1,23 @@
+.Mini-widget {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.Mini-widget .component {
+  color: white;
+  display: flex;
+  /* width: 25%; */
+  width: 14vw;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Mini-widget .component h3 {
+  margin-bottom: 5px;
+}
+
+.Mini-widget .component p {
+  color: #dcdcdc;
+  font-weight: 400;
+  padding: 0 0.3rem;
+}

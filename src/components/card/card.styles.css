@@ -1,0 +1,7 @@
+.Custom-card {
+  background: #4f4f4f;
+  z-index: 2;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+  padding: 1.5rem;
+  border-radius: 10px;
+}
