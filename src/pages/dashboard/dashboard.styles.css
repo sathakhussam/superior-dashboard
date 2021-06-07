@@ -1,3 +1,20 @@
 .Dashboard {
   padding: 2rem;
 }
+
+.Dashboard .custom-card {
+  margin: 2rem 0;
+  color: white;
+}
+
+.Dashboard .custom-card h3 {
+  margin: 0.5rem 1rem;
+}
+
+#chartContainer .apexcharts-tooltip {
+  color: #000;
+}
+
+#chartContainer .apexcharts-tooltip .apexcharts-tooltip-series-group {
+  background: #fff !important;
+}

@@ -1,13 +1,13 @@
 .Mini-widget {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .Mini-widget .component {
   color: white;
   display: flex;
   /* width: 25%; */
-  width: 14vw;
+  width: 16vw;
   flex-direction: column;
   align-items: center;
 }

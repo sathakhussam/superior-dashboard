@@ -1,0 +1,22 @@
+.OrdersPage {
+  padding: 1.5rem;
+  overflow: hidden;
+  color: white;
+}
+
+.OrdersPage .custom-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.OrdersPage .custom-card .top-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.OrdersPage table {
+  width: 70vw;
+}

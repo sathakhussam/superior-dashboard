@@ -1,0 +1,15 @@
+.TripleCharts {
+  display: flex;
+  height: 350px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.TripleCharts .custom-card {
+  width: 85%;
+  margin: 0.5rem 2rem 0.5rem 0;
+}
+
+.TripleCharts .custom-card:last-child {
+  margin-right: 0;
+}
