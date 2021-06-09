@@ -20,3 +20,41 @@
 .OrdersPage table {
   table-layout: fixed;
 }
+
+.UserSeperate {
+  color: #ddd;
+  padding: 2rem;
+}
+
+.UserSeperate .CustomCard {
+  display: flex;
+}
+
+.UserSeperate h3 {
+  color: white;
+}
+
+.UserSeperate .CustomCard div {
+  width: 100%;
+}
+
+.UserSeperate .CustomCard b {
+  font-weight: 600;
+  color: #fff;
+}
+
+.UserSeperate .CustomCard div img {
+  width: 450px;
+  border-radius: 15px;
+  height: 450px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.UserSeperate .CustomCard div h3 {
+  margin-bottom: 15px;
+}
+
+.UserSeperate .CustomCard div p:nth-child(4) {
+  margin-bottom: 10px;
+}

@@ -5,6 +5,7 @@ import Dashboard from "./pages/dashboard/dashboard.page"
 import OrdersPage from './pages/orders/orders.page'
 import CarsPage from './pages/cars/cars.page'
 import UsersPage from './pages/users/users.page'
+import UserSeperatePage from './pages/users/users-seperate.page'
 // Components
 import Header from "./components/header/header.component"
 
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/orders" component={OrdersPage} />
           <Route exact path="/cars" component={CarsPage} />
           <Route exact path="/users" component={UsersPage} />
+          <Route exact path="/users/seperate" component={UserSeperatePage} />
         </Switch>
       </div>
     </div>
