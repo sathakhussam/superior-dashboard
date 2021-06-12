@@ -17,10 +17,38 @@
   margin-bottom: 1.5rem;
 }
 
-.OrdersPage table {
-  table-layout: fixed;
+.SeperateOrderPage {
+  padding: 1rem;
+  color: white;
+}
+
+.SeperateOrderPage a {
+  color: #f5bb11;
+  font-weight: 600;
 }
 
 .SeperateOrderPage li {
-  margin-left: 1rem;
+  margin-left: 3rem;
+}
+
+.OrdersPage {
+  color: #ddd;
+  padding: 2rem;
+}
+
+.OrdersPage h3 {
+  color: white;
+}
+
+.OrdersPage .CustomCard div {
+  width: 100%;
+}
+
+.OrdersPage a {
+  color: #fff;
+}
+
+.OrdersPage .CustomCard b {
+  font-weight: 600;
+  color: #fff;
 }

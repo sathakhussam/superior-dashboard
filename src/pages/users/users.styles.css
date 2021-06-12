@@ -26,7 +26,7 @@
   padding: 2rem;
 }
 
-.UserSeperate .CustomCard {
+.UserSeperate .CustomCard .Row {
   display: flex;
 }
 
@@ -34,7 +34,7 @@
   color: white;
 }
 
-.UserSeperate .CustomCard div {
+.UserSeperate .CustomCard .Row div {
   width: 100%;
 }
 
@@ -43,7 +43,7 @@
   color: #fff;
 }
 
-.UserSeperate .CustomCard div img {
+.UserSeperate .CustomCard .Row div img {
   width: 450px;
   border-radius: 15px;
   height: 450px;
@@ -57,33 +57,4 @@
 
 .UserSeperate .CustomCard div p:nth-child(4) {
   margin-bottom: 10px;
-}
-
-
-.SeperateOrderPage {
-  padding: 1rem;
-  color: white;
-}
-
-
-.OrdersPage {
-  color: #ddd;
-  padding: 2rem;
-}
-
-.OrdersPage h3 {
-  color: white;
-}
-
-.OrdersPage .CustomCard div {
-  width: 100%;
-}
-
-.OrdersPage a {
-  color: #fff;
-}
-
-.OrdersPage .CustomCard b {
-  font-weight: 600;
-  color: #fff;
 }

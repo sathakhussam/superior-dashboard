@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from '../../components/card/card.component'
-import './users.styles.css'
+import './cars.styles.css'
 import Carousel from '../../components/carousel/carousel.component'
 
 const images = [
@@ -13,36 +13,33 @@ const images = [
     { url: "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8bmF0dXJlfGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" },
   ];
 
-
-const UsersSeperate = (props) => {
+const CarSeperate = (props) => {
     return(
-        <div className="UserSeperate">
+        <div className="CarSeperate">
             <Card customClass="CustomCard">
                 <div className="Row">
                     <div>
                         <h3>User Details</h3>                    
-                        <p>Name : <b>Sathak Uzham</b></p>
-                        <p>Email : <b>sathakhussam@gmail.com</b></p>
-                        <p>Phone : <b>+971 7634564636</b></p>
-                        <h3>Billing Details</h3>
-                        <p>First Name : <b>Sathak</b></p>
-                        <p>Last Name : <b>Uzham</b></p>
-                        <p>Company Name : <b>Artistic Programmer</b></p>
-                        <p>Country : <b>India</b></p>
-                        <p>Address : <b>17/247 South Street Kilakarai <br/> Ramanathapuram Tamilnadu</b></p>
-                        <p>City : <b>Kilakarai</b></p>
-                        <p>Phone : <b>+971 7634564636</b></p>
-                        <p>Email : <b>sathakhussam@gmail.com</b></p>
-                    </div>
-                    <div>
-                        <img src="https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" />
+                        <p>Car Name : <b>Ferrari 253</b></p>
+                        <p>Description : Best available car out there in the ferrari it is all about brand Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus accusantium, quibusdam incidunt error esse sit nesciunt hic cupiditate voluptate ducimus repudiandae voluptatem ab! Amet alias eligendi aperiam accusantium magni doloremque.</p>
+                        <p>KM Included : <b>250KM</b></p>
+                        <p>Hourly Rate : <b>50 AED</b></p>
+                        <p>Per Day Rate : <b>2500 AED</b></p>
+                        <p>Pre Deposit : <b>2500 AED</b></p>
+                        <p>Contact : <b>+971 1234567890</b></p>
+                        <p>Whatapp Number : <b>+971 1234567890</b></p>
+                        <p>Whatapp Number : <b>+971 1234567890</b></p>
+                        <p>Type : <b>Sports</b></p>
+                        <p>Brand : <b>Ferrari</b></p>
+                        <p>Ratings : <b>2.5</b></p>
+                        <p>Ratings : <b>12th Jan 2021</b></p>
+                        <p>Related Videos : <b>12th Jan 2021</b></p>
                     </div>
                 </div>
                 <Carousel images={images}/>
-
             </Card>
         </div>
     )
 }
 
-export default UsersSeperate
+export default CarSeperate

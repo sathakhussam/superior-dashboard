@@ -20,3 +20,42 @@
 .OrdersPage table {
   width: 70vw;
 }
+
+.CarSeperate {
+  color: #ddd;
+  padding: 2rem;
+}
+
+.CarSeperate .CustomCard .Row {
+  display: flex;
+}
+
+.CarSeperate h3 {
+  color: white;
+}
+
+.CarSeperate .CustomCard div {
+  width: 100%;
+}
+
+.CarSeperate .CustomCard b {
+  font-weight: 600;
+  color: #fff;
+}
+
+.CarSeperate .CustomCard div img {
+  width: 450px;
+  border-radius: 15px;
+  height: 450px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.CarSeperate .CustomCard div h3 {
+  margin-bottom: 15px;
+}
+
+.CarSeperate .CustomCard div p:nth-child(4) {
+  margin-bottom: 10px;
+}
+

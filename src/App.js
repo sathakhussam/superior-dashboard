@@ -5,6 +5,7 @@ import Dashboard from "./pages/dashboard/dashboard.page"
 import OrdersPage from './pages/orders/orders.page'
 import SeperateOrdersPage from './pages/orders/seperate-orders.page'
 import CarsPage from './pages/cars/cars.page'
+import CarSeperatePage from './pages/cars/cars-seperate.page'
 import UsersPage from './pages/users/users.page'
 import UserSeperatePage from './pages/users/users-seperate.page'
 import LoginPage from './pages/login/login.page'
@@ -36,6 +37,7 @@ function App() {
         <Switch>
             <Route exact path="/" component={Dashboard} />
             <Route exact path="/cars" component={CarsPage} />
+            <Route exact path="/cars/seperate" component={CarSeperatePage} />
             <Route exact path="/orders" component={OrdersPage} />
             <Route exact path="/orders/seperate" component={SeperateOrdersPage} />
             <Route exact path="/cars" component={CarsPage} />
