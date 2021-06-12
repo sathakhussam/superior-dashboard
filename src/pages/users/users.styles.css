@@ -58,3 +58,32 @@
 .UserSeperate .CustomCard div p:nth-child(4) {
   margin-bottom: 10px;
 }
+
+
+.SeperateOrderPage {
+  padding: 1rem;
+  color: white;
+}
+
+
+.OrdersPage {
+  color: #ddd;
+  padding: 2rem;
+}
+
+.OrdersPage h3 {
+  color: white;
+}
+
+.OrdersPage .CustomCard div {
+  width: 100%;
+}
+
+.OrdersPage a {
+  color: #fff;
+}
+
+.OrdersPage .CustomCard b {
+  font-weight: 600;
+  color: #fff;
+}

@@ -1,3 +1,7 @@
+.beforeApp {
+  background-color: #242424;
+}
+
 .App {
   background-color: #242424;
   display: flex;
