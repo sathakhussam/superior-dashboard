@@ -102,6 +102,18 @@ class Dashboard extends Component {
     render() {
         return (
             <div className="Dashboard">
+                <Card customClass="custom-card custom-card-searchby">
+                  <label>
+                    Sort By 
+                  <select className="searchby" name="SearchBy" id="">
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="custom">Custom</option>
+                  </select>
+                  </label>
+                  <input type="date" name="" id="" className="myowninput" />
+                </Card>
                 <MiniWidget />
                 <Card customClass="custom-card" >
                 <h3>Sales Analytics</h3>

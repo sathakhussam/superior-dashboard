@@ -8,6 +8,20 @@ class OrdersPage extends Component {
     render() {
         return (
             <div className="OrdersPage">
+                <div>
+                <Card customClass="custom-card custom-card-searchby">
+                  <label>
+                    Sort By 
+                  <select className="searchby" name="SearchBy" id="">
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="custom">Custom</option>
+                  </select>
+                  </label>
+                  <input type="date" name="" id="" className="myowninput" />
+                </Card>
+                </div>
                 <Card customClass="custom-card">
                 <div className="top-div">
                     <h3>All available users</h3>

@@ -3,6 +3,7 @@ import {Switch, Route, Link, useLocation} from 'react-router-dom'
 // Pages
 import Dashboard from "./pages/dashboard/dashboard.page"
 import OrdersPage from './pages/orders/orders.page'
+import OrdersCreatePage from './pages/orders/order-create-page.page'
 import SeperateOrdersPage from './pages/orders/seperate-orders.page'
 import CarsPage from './pages/cars/cars.page'
 import CarsNewPage from './pages/cars/cars-newform.page'
@@ -42,6 +43,7 @@ function App() {
             <Route exact path="/cars/new" component={CarsNewPage} />
             <Route exact path="/orders" component={OrdersPage} />
             <Route exact path="/orders/seperate" component={SeperateOrdersPage} />
+            <Route exact path="/orders/new" component={OrdersCreatePage} />
             <Route exact path="/cars" component={CarsPage} />
             <Route exact path="/users" component={UsersPage} />
             <Route exact path="/users/seperate" component={UserSeperatePage} />

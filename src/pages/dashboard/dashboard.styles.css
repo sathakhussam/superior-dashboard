@@ -18,3 +18,33 @@
 #chartContainer .apexcharts-tooltip .apexcharts-tooltip-series-group {
   background: #fff !important;
 }
+
+.custom-card .searchby {
+  margin-left: 1.5rem;
+  background-color: #242424;
+  color: white;
+  padding: 0.4rem 2.5rem;
+  border: none;
+  border-radius: 4px;
+}
+
+.custom-card .searchby:focus,
+.custom-card input[type="date"]:focus,
+.custom-card .searchby:hover {
+  outline: none;
+  background-color: #333;
+}
+
+.custom-card .myowninput {
+  margin-left: 1rem;
+  background-color: #242424;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 5px;
+}
+
+.custom-card-searchby {
+  display: flex;
+  justify-content: space-between;
+}
