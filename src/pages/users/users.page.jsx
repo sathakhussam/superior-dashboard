@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import "./users.styles.css"
 
 import Card from '../../components/card/card.component'
-
+import './users.styles.css'
 class OrdersPage extends Component {
     render() {
         return (
             <div className="OrdersPage">
+                <Card customClass="custom-card-sep">
+                    <label>
+                        Search By Name
+                        <input placeholder="Search By Name" type="text" name="" id="" />
+                    </label>
+                </Card>
                 <Card customClass="custom-card">
                 <div className="top-div">
                     <h3>All available users</h3>

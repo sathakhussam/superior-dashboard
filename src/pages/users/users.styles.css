@@ -58,3 +58,36 @@
 .UserSeperate .CustomCard div p:nth-child(4) {
   margin-bottom: 10px;
 }
+
+.custom-card-sep {
+  margin: 1rem 0;
+  margin-bottom: 2rem;
+}
+
+.custom-card-sep input,
+.custom-card-sep select {
+  margin-left: 2rem;
+  padding: 0.4rem 1rem;
+  background-color: #242424;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  width: 60%;
+}
+
+.custom-card-sep label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.custom-card-sep input:focus {
+  outline: none;
+}
+
+.custom-card-sep {
+  padding-bottom: none;
+}
+
+.custom-card-sep label .Addspace {
+  width: 4px;
+}
