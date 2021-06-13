@@ -59,3 +59,47 @@
   margin-bottom: 10px;
 }
 
+
+.CarNewForm {
+  padding: 2rem;
+  color: white;
+}
+
+.CarNewForm input, .CarNewForm select {
+  padding: .5rem 1rem;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  margin-top: 12px;
+  font-weight: 500;
+  color: white;
+
+  background-color: #242424;
+}
+
+.CarNewForm input:focus,
+.CarNewForm select:focus {
+
+  outline: none;
+  border: white;
+}
+
+.CarNewForm button {
+  width: 100%;
+  padding: 1rem 1rem;
+  margin-top: 1rem;
+  background-color: #f5bb11;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+
+
+.CarNewForm .fileupload {
+  cursor: pointer;
+  margin-top: 12px;
+  padding: .7rem 1rem;
+  border-radius: 7px;
+  background: #242424;
+}

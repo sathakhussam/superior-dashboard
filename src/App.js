@@ -5,6 +5,7 @@ import Dashboard from "./pages/dashboard/dashboard.page"
 import OrdersPage from './pages/orders/orders.page'
 import SeperateOrdersPage from './pages/orders/seperate-orders.page'
 import CarsPage from './pages/cars/cars.page'
+import CarsNewPage from './pages/cars/cars-newform.page'
 import CarSeperatePage from './pages/cars/cars-seperate.page'
 import UsersPage from './pages/users/users.page'
 import UserSeperatePage from './pages/users/users-seperate.page'
@@ -18,7 +19,7 @@ function App() {
   return (
     <div className="beforeApp">
       {
-        useLocation().pathname == '/login' 
+        useLocation().pathname === '/login' 
         ?
         <Route exact path="/login" component={LoginPage} />
         :
@@ -38,6 +39,7 @@ function App() {
             <Route exact path="/" component={Dashboard} />
             <Route exact path="/cars" component={CarsPage} />
             <Route exact path="/cars/seperate" component={CarSeperatePage} />
+            <Route exact path="/cars/new" component={CarsNewPage} />
             <Route exact path="/orders" component={OrdersPage} />
             <Route exact path="/orders/seperate" component={SeperateOrdersPage} />
             <Route exact path="/cars" component={CarsPage} />

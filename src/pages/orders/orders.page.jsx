@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "./orders.styles.css"
+import { Link } from 'react-router-dom';
 
 import Card from '../../components/card/card.component'
 
@@ -10,9 +11,9 @@ class OrdersPage extends Component {
                 <Card customClass="custom-card">
                 <div className="top-div">
                     <h3>All available users</h3>
-                    <a className="btn btn-primary" href="#">Place Order</a>
+                    <Link className="btn btn-primary" href="#">Place Order</Link>
                 </div>
-                <table class="rtable">
+                <table className="rtable">
                     <thead>
                         <tr>
                         <th>ID</th>

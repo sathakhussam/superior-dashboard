@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "./cars.styles.css"
+import { Link } from 'react-router-dom';
 
 import Card from '../../components/card/card.component'
 
@@ -10,7 +11,7 @@ class CarsPage extends Component {
                 <Card customClass="custom-card">
                 <div className="top-div">
                     <h3>All Available Cars</h3>
-                    <a className="btn btn-primary" href="#">Add new</a>
+                    <Link className="btn btn-primary" to="/cars/new">Add new</Link>
                 </div>
                 <table class="rtable">
                     <thead>
