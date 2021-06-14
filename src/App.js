@@ -1,4 +1,4 @@
-import {Switch, Route, Link, useLocation} from 'react-router-dom'
+import {Switch, Route, Link, Redirect, useLocation} from 'react-router-dom'
 
 // Pages
 import Dashboard from "./pages/dashboard/dashboard.page"
@@ -15,44 +15,64 @@ import LoginPage from './pages/login/login.page'
 import Header from "./components/header/header.component"
 
 import './App.css';
+import { createContext, useContext, useState } from 'react'
 
 function App() {
+  const [loggedIn, ChangeLogIn] = useState(false)
+  const tobeReturn =
+    (<div className="App">
+      <div className="sidebar">
+        <h1>Superior Rental</h1>
+        <div className="sidebar--links">
+          <Link to="/">Dashboard</Link>
+          <Link to="/orders">Orders</Link>
+          <Link to="/cars">Cars</Link>
+          <Link to="/users">Users</Link>
+        </div>
+      </div>
+      <div className="content">
+        <Header />
+      <Switch>
+          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/cars" component={CarsPage} />
+          <Route exact path="/cars/seperate" component={CarSeperatePage} />
+          <Route exact path="/cars/new" component={CarsNewPage} />
+          <Route exact path="/orders" component={OrdersPage} />
+          <Route exact path="/orders/seperate" component={SeperateOrdersPage} />
+          <Route exact path="/orders/new" component={OrdersCreatePage} />
+          <Route exact path="/cars" component={CarsPage} />
+          <Route exact path="/users" component={UsersPage} />
+          <Route exact path="/users/seperate" component={UserSeperatePage} />
+      </Switch>
+      </div>
+    </div>)
+
+  let displaay = null
+  const currurl = useLocation().pathname
+  if (currurl === '/login' && loggedIn.login === false) {
+    displaay = <Route exact path="/login" render={(props) => <LoginPage loginState={{loggedIn, ChangeLogIn}} {...props} />} />
+  }
+  else if (currurl === '/login' && loggedIn.login === false) {
+    displaay = <Redirect to="/" />
+  }
+  else if (loggedIn.login === false) {
+    displaay = <Redirect to="/login" />
+  }
+  else if (currurl === '/logout') {
+    console.log(loggedIn)
+    ChangeLogIn(false)
+    displaay = <Redirect to="/login" />
+  }
+  else {
+    displaay = tobeReturn
+  }
   return (
     <div className="beforeApp">
       {
-        useLocation().pathname === '/login' 
-        ?
-        <Route exact path="/login" component={LoginPage} />
-        :
-        <div className="App">
-        <div className="sidebar">
-          <h1>Superior Rental</h1>
-          <div className="sidebar--links">
-            <Link to="/">Dashboard</Link>
-            <Link to="/orders">Orders</Link>
-            <Link to="/cars">Cars</Link>
-            <Link to="/users">Users</Link>
-          </div>
-        </div>
-        <div className="content">
-          <Header />
-        <Switch>
-            <Route exact path="/" component={Dashboard} />
-            <Route exact path="/cars" component={CarsPage} />
-            <Route exact path="/cars/seperate" component={CarSeperatePage} />
-            <Route exact path="/cars/new" component={CarsNewPage} />
-            <Route exact path="/orders" component={OrdersPage} />
-            <Route exact path="/orders/seperate" component={SeperateOrdersPage} />
-            <Route exact path="/orders/new" component={OrdersCreatePage} />
-            <Route exact path="/cars" component={CarsPage} />
-            <Route exact path="/users" component={UsersPage} />
-            <Route exact path="/users/seperate" component={UserSeperatePage} />
-        </Switch>
-        </div>
-      </div>
+        displaay
       }
     </div>
   );
 }
 
-export default App;
+export {App};

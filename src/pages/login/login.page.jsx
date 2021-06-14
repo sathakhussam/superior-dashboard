@@ -1,19 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './login.styles.css'
 import { Link } from 'react-router-dom';
+import api from '../../api/api';
 
-const LoginPage = () => {
+const LoginPage = (props) => {
+    const {handleSubmit, handleInputChange, inputs} = useForms()
     return ( 
         <div className="LoginPage">
             <section>
                 <h2>Superior Rental</h2>
-                <input type="email" placeholder="Email"/>
-                <input type="password" placeholder="Password"/>
-                <button>Login</button>
-                <p>Forgot your password? <Link href="#">Click Here</Link></p>
+                <form onSubmit={(evt) => handleSubmit(evt, props.loginState)}>
+                    <input name="email" value={inputs.email} onChange={handleInputChange} type="email" placeholder="Email"/>
+                    <input name="password" value={inputs.password} onChange={handleInputChange} type="password" placeholder="Password"/>
+                    <button>Login</button>
+                </form>
+                <p>Forgot your password? <Link to="#">Click Here</Link></p>
             </section>
         </div>
      );
 }
- 
+
+const loginUser = async (userName, password) => {
+    const token = await api.post("users/login", {"email": userName, "password": password})
+    return token
+}
+
+const useForms = (callback) => {
+    const [inputs, setInputs] = useState({email: "", password: ""});
+    const handleSubmit = async (event, loginState) => {
+      if (event) {
+        event.preventDefault();
+      }
+      const token = await loginUser(inputs.email, inputs.password)
+      loginState.ChangeLogIn(true)
+      localStorage.setItem("jwt", token.data.token)
+      console.log(loginState)
+    }
+    const handleInputChange = (event) => {
+      event.persist();
+      console.log(event.target.value)
+      setInputs(inputs => ({...inputs, [event.target.name]: event.target.value}));
+    }
+    return {
+      handleSubmit,
+      handleInputChange,
+      inputs
+    };
+  }
+
 export default LoginPage;

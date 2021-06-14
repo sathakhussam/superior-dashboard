@@ -25,7 +25,7 @@
 }
 
 .LoginPage input {
-    background-color: #6f6f6f;
+    background-color: #242424;
     padding: 0;
     margin: 0;
     margin-bottom: 1rem;
@@ -35,6 +35,11 @@
     width: 100%;
     padding: .5rem 1.5rem;
 }
+
+.LoginPage input:focus {
+    outline: none;
+}
+
 
 .LoginPage button {
     color: white;

@@ -1,102 +1,71 @@
 import React, { Component } from 'react';
 import './dashboard.styles.css'
 // import ApexCharts, {ReactApexChart} from 'apexcharts'
-import ReactApexChart from 'react-apexcharts'
 
 // Components
 import MiniWidget from '../../components/mini-widget/mini-widget.component';
 import Card from '../../components/card/card.component'
 import TripleCharts from '../../components/tripe-charts/triple-charts.component'
+import API from '../../api/api'
+import filterByDates from '../../api/filterbyDate';
+// import {RevenueWidget, OrderWidget} from '../../api/miniWidget'
+// import {topSellingCarsWithName, topSellingCategory, topSellingBrands} from '../../api/triplegraphs'
+
+import {ordersHome} from '../../api/ordersHome'
+import SalesChart from '../../components/sales.chart.component'
+// import React, { Component } from 'react';
+// import { OrderHome } from './api/ordersPage';
+// eslint-disable-next-line no-unused-vars
 
 class Dashboard extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
+  constructor(props) {
+    super(props)
+    
+    this.state = {
+      MiniWidget: {
+        totalRevenue: 0,
+            totalOrders: 0,
+            totalCustomers: 0,
+            growth: 0,
+          },
           salesChart: {
-
-            series: [{
-                name: 'No Of Sales',
-                data: [1001, 2212, 1212 , 183]
-              }],
-              options: {
-                fill: {
-                  colors: ["#f5bb11"]
-              },
-                chart: {
-                  height: 350,
-                  type: 'bar',
-                  foreColor: '#fff',
-
-                tooltip: {
-                    theme: 'dark',
-                 }
-            },
-                plotOptions: {
-                  bar: {
-                    borderRadius: 10,
-                    dataLabels: {
-                      position: 'center', // top, center, bottom
-                    },
-                  }
-                },
-                dataLabels: {
-                  enabled: true,
-                  formatter: function (val) {
-                    return val
-                  },
-                  offsetY: -20,
-                  style: {
-                    fontSize: '12px',
-                    colors: ["#fff"]
-                  }
-                },
-                
-                xaxis: {
-                  categories: ["Week 1", "Week 2", "Week 3", "Week 4"],
-                  position: 'top',
-                  axisBorder: {
-                    show: false
-                  },
-                  axisTicks: {
-                    show: false
-                  },
-                  crosshairs: {
-                    fill: {
-                      type: 'gradient',
-                      gradient: {
-                        colorFrom: '#D8E3F0',
-                        colorTo: '#BED1E6',
-                        stops: [0, 100],
-                        opacityFrom: 0.4,
-                        opacityTo: 0.5,
-                      }
-                    }
-                  },
-                  tooltip: {
-                    theme: 'dark',
-                    enabled: false,
-                  }
-                },
-                yaxis: {
-                  axisBorder: {
-                    show: false
-                  },
-                  axisTicks: {
-                    show: false,
-                  },
-                  labels: {
-                    show: false,
-                    formatter: function (val) {
-                      return val ;
-                    }
-                  }
-                
-                },
-              },
-            
+            labels : [],
+            values : [],
+          }
         }
-        }
+    }
+    
+    async componentDidMount() {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      try {
+      const token = await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"})
+      this.setState({token: token.data.token})
+      const allOrders = await (await API.get("orders/", {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
+      const allUsers = await (await API.get("users/", {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
+      // console.log(allUsers)
+      // console.log(filterByDates("year",allOrders))
+      const filteredOrders = filterByDates("year", allOrders)
+      const newArr = await ordersHome(filterByDates("year", allOrders))
+      console.log(newArr)
+      this.setState({
+        MiniWidget: {
+          ...this.state.MiniWidget,
+          totalRevenue: filteredOrders.map(item => parseFloat(item.cost)).reduce((a,b) => a+b,0),
+          totalOrders: filteredOrders.length,
+          totalCustomers: allUsers.length,
+          // growth: filteredOrders.map(item => item.cost).reduce((a,b) => a+b,0) - prevData.map(item => item.cost).reduce((a,b) => a+b,0)/prevData.map(item => item.cost).reduce((a,b) => a+b,0),
+        },
+        salesChart: {labels: newArr["names"], values: newArr["value"]}
+      })
+      // const newArr = await topSellingCategory(filterByDates("year", allOrders))
+      // const newArr = await topSellingBrands(filterByDates("year", allOrders))
+      // console.log(newArr)
+
+      // const orderHome = await OrderHome(filterByDates("year", allOrders), "19 May 2021", null, "Ferrari")
+      // console.log(myarr)
+    } catch(e) {
+      console.log(e.message)
+    }
     }
 
     render() {
@@ -114,12 +83,10 @@ class Dashboard extends Component {
                   </label>
                   <input type="date" name="" id="" className="myowninput" />
                 </Card>
-                <MiniWidget />
+                <MiniWidget values={this.state.MiniWidget}/>
                 <Card customClass="custom-card" >
                 <h3>Sales Analytics</h3>
-                <div id="chartContainer">
-                  <ReactApexChart options={this.state.salesChart.options} series={this.state.salesChart.series} type="bar" height={350} />
-                </div>
+                <SalesChart labels={this.state.salesChart.labels} values={this.state.salesChart.values} />
                 </Card>
                 <TripleCharts />
             </div>
