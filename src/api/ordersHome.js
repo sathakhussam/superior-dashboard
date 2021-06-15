@@ -38,7 +38,6 @@ const filterByDates = (preference, arrayToFilter, cac) => {
         myVar = parseInt(cac.getMonth()-(idx-1))
       }
       const notDone = parseInt(cac.getMonth()-(idx-1))
-      console.log(myVar)
       const myIDENT = arrayToFilter.filter(obj => {
         if (notDone < 0) {
           if (new Date(obj.createdOn) <= new Date(`${myVar}-${cac.getDate()}-${cac.getFullYear()-1}`) && new Date(obj.createdOn) >= new Date(`${myVar-1}-${cac.getDate()}-${cac.getFullYear()}`)) return true 
@@ -48,7 +47,6 @@ const filterByDates = (preference, arrayToFilter, cac) => {
       })
       const yearss = (notDone < 0) ? cac.getFullYear() - 1 : cac.getFullYear()
       if (myIDENT.length > 0) {
-        console.log("here")
         Detail.push((myIDENT.map(obj => parseInt(obj.cost)).reduce((a, b) => a+b)))
         Name.push(`${month_name(myVar-1)} ${yearss}`)
       }
@@ -57,7 +55,6 @@ const filterByDates = (preference, arrayToFilter, cac) => {
         Name.push(`${month_name(myVar-1)} ${yearss}`)
       }
     })
-    // console.log(Name, Detail)
     ReturnArray["names"] = Name
     ReturnArray["value"] = Detail
 

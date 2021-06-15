@@ -9,7 +9,7 @@ import TripleCharts from '../../components/tripe-charts/triple-charts.component'
 import API from '../../api/api'
 import filterByDates from '../../api/filterbyDate';
 // import {RevenueWidget, OrderWidget} from '../../api/miniWidget'
-// import {topSellingCarsWithName, topSellingCategory, topSellingBrands} from '../../api/triplegraphs'
+import {topSellingCarsWithName, topSellingCategory, topSellingBrands} from '../../api/triplegraphs'
 
 import {ordersHome} from '../../api/ordersHome'
 import SalesChart from '../../components/sales.chart.component'
@@ -31,7 +31,10 @@ class Dashboard extends Component {
           salesChart: {
             labels : [],
             values : [],
-          }
+          },
+          brandsChart : {values: [], labels: []},
+          categoryChart : {values: [], labels: []},
+          carsChart : {values: [], labels: []}
         }
     }
     
@@ -46,7 +49,10 @@ class Dashboard extends Component {
       // console.log(filterByDates("year",allOrders))
       const filteredOrders = filterByDates("year", allOrders)
       const newArr = await ordersHome(filterByDates("year", allOrders))
-      console.log(newArr)
+      const ArrOfBrands = await topSellingBrands(allOrders)
+      const ArrOfCategory = await topSellingCategory(allOrders)
+      const ArrOfCars = await topSellingCarsWithName(allOrders)
+      console.log(ArrOfCategory)
       this.setState({
         MiniWidget: {
           ...this.state.MiniWidget,
@@ -55,7 +61,10 @@ class Dashboard extends Component {
           totalCustomers: allUsers.length,
           // growth: filteredOrders.map(item => item.cost).reduce((a,b) => a+b,0) - prevData.map(item => item.cost).reduce((a,b) => a+b,0)/prevData.map(item => item.cost).reduce((a,b) => a+b,0),
         },
-        salesChart: {labels: newArr["names"], values: newArr["value"]}
+        salesChart: {labels: newArr["names"], values: newArr["value"]},
+        brandsChart: ArrOfBrands,
+        categoryChart: ArrOfCategory,
+        carsChart: ArrOfCars,
       })
       // const newArr = await topSellingCategory(filterByDates("year", allOrders))
       // const newArr = await topSellingBrands(filterByDates("year", allOrders))
@@ -88,7 +97,7 @@ class Dashboard extends Component {
                 <h3>Sales Analytics</h3>
                 <SalesChart labels={this.state.salesChart.labels} values={this.state.salesChart.values} />
                 </Card>
-                <TripleCharts />
+                <TripleCharts brands={this.state.brandsChart} categories={this.state.categoryChart} cars={this.state.carsChart} />
             </div>
         );
     }

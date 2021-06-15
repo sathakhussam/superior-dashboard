@@ -37,19 +37,28 @@ const topSellingCars = (allOrders) => {
 } 
 
 const topSellingCarsWithName = async (allOrders) => {
-    return await Promise.all(topSellingCars(allOrders).seperatedByCar.map(async (value) => {
+    const toReturn = await Promise.all(topSellingCars(allOrders).seperatedByCar.map(async (value) => {
         return {id: value.id, noOfCars: value.noOfCars, name: await (await API.get(`cars/${value.id}`)).data.data.name}
     }))
+        console.log(toReturn.map())
+    const finalreturn = {values: Object.values(toReturn), labels: Object.keys(toReturn)}
+    finalreturn["labels"] = finalreturn.labels.map(val => {
+        if (val.length > 6)  {
+            const tempVar = `${val.slice(0, 7)}..`
+            return tempVar.charAt(0).toUpperCase() + tempVar.toLowerCase().slice(1)
+        }
+        return val.charAt(0).toUpperCase() + val.toLowerCase().slice(1)
+    })
 }
  
 const topSellingCategory = async (allOrders) => {
 
     let toReturn = {
         SUV: 0,
-        Convertible: 0,
-        Luxury: 0,
-        Sports: 0,
-        Special: 0,
+        convertibles: 0,
+        luxury: 0,
+        sports: 0,
+        special: 0,
     }
 
     let newArr ={}
@@ -65,10 +74,20 @@ const topSellingCategory = async (allOrders) => {
 
     let neww = await Promise.all(newMethodArr.map(async (val) => {
         let newVar = await (await API.get(`cars/${val.cars[0].car}`)).data.data.type
-        toReturn[newVar] += 1
+        console.log(val.cars.length)
+        toReturn[newVar] += val.cars.length
     }))
 
-    return toReturn
+
+    const finalreturn = {values: Object.values(toReturn), labels: Object.keys(toReturn)}
+    finalreturn["labels"] = finalreturn.labels.map(val => {
+        if (val.length > 6)  {
+            const tempVar = `${val.slice(0, 7)}..`
+            return tempVar.charAt(0).toUpperCase() + tempVar.toLowerCase().slice(1)
+        }
+        return val.charAt(0).toUpperCase() + val.toLowerCase().slice(1)
+    })
+    return finalreturn
 }
 
 const topSellingBrands = async (allOrders) => {
@@ -93,7 +112,12 @@ const topSellingBrands = async (allOrders) => {
         else if (!toReturn[newVar]) toReturn[newVar] = val.cars.length
     }))
 
-    return toReturn
+    const finalreturn = {values: Object.values(toReturn), labels: Object.keys(toReturn)}
+    finalreturn["labels"] = finalreturn.labels.map(val => {
+        if (val.length > 6) return `${val.slice(0, 5)}..`
+        return val
+    })
+    return finalreturn
 }
 
 export {topSellingCarsWithName, topSellingCategory, topSellingBrands}
