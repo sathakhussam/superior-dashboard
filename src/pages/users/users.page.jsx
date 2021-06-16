@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import API from '../../api/api'
+import {Link} from 'react-router-dom'
 
 import Card from '../../components/card/card.component'
 import './users.styles.css'
-import {Link} from 'react-router-dom'
 class OrdersPage extends Component {
     constructor(props) {
         super(props)
@@ -59,7 +59,7 @@ class OrdersPage extends Component {
                     <tbody>
                         {   
                             this.state.allUsers.map((user, idx) => {
-                                return <tr>
+                                return <tr key={`users-idx`}>
                                     <td><Link to="/users/seperate">{user["_id"].slice(0,5)}..</Link></td>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
