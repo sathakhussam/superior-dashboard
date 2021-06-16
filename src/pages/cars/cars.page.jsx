@@ -34,8 +34,11 @@ class CarsPage extends Component {
             // let myFilteredCars;
             // if ()
             let myFilteredCars = allCar.filter(val => val.name.toLowerCase().includes(this.state.searchName))
+            console.log(myFilteredCars)
             myFilteredCars = myFilteredCars.filter(val => val.type.toLowerCase().includes(this.state.searchType))
-            myFilteredCars = myFilteredCars.filter(val => val.brand.toLowerCase().includes(this.state.searchBrand))
+            console.log(myFilteredCars)
+            myFilteredCars = myFilteredCars.filter(val => val.brand.includes(this.state.searchBrand))
+            console.log(myFilteredCars)
             this.setState({
                 allCars: myFilteredCars
             })
@@ -55,6 +58,7 @@ class CarsPage extends Component {
                         <div className="Addspace"></div>
                         Search By Type 
                         <select value={this.state.searchType} onChange={this.handleValueChange} name="searchType" id="">
+                            <option value="">Select Type</option>
                             <option value="sports">Sports</option>
                             <option value="luxury">Luxury</option>
                             <option value="special">Special</option>
@@ -64,7 +68,8 @@ class CarsPage extends Component {
                     </label>
                     <label>
                         Search By Brand
-                        <select name="Type" id="">
+                        <select name="searchBrand" value={this.state.searchBrand} onChange={this.handleValueChange} id="">
+                            <option value="">Select Brand</option>
                             <option value="Ferrari">Ferrari</option>
                             <option value="Lamborghini">Lamborghini</option>
                             <option value="Ford">Ford</option>
@@ -108,7 +113,7 @@ class CarsPage extends Component {
                             this.state.allCars.map((car, idx) => {
                             console.log("here")
                             return <tr key={`carsid-${idx}`}>
-                                <td>{car.name}</td>
+                                <td><Link to="/cars/seperate">{car.name}</Link></td>
                                 <td>{car.type}</td>
                                 <td>{car.brand}</td>
                                 <td>{car.ratings}</td>
