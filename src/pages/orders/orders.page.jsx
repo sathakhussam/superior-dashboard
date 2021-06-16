@@ -75,7 +75,7 @@ class OrdersPage extends Component {
                         {
                             this.state.allOrders.map((val, idx) => {
                         return <tr key={`orders-id-${idx}`}>
-                            <td>{val["_id"].slice(0,5)}..</td>
+                            <td><Link to={`/orders/${val["_id"]}`}>{val["_id"].slice(0,5)}..</Link></td>
                             <td>{val.carName}</td>
                             <td>sathakhussam@gmail.com</td>
                             <td>{val.bookByDays ? val.pickUpDate : "null"}</td>

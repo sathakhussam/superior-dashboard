@@ -60,7 +60,7 @@ class OrdersPage extends Component {
                         {   
                             this.state.allUsers.map((user, idx) => {
                                 return <tr key={`users-idx`}>
-                                    <td><Link to="/users/seperate">{user["_id"].slice(0,5)}..</Link></td>
+                                    <td><Link to={`/users/${user["_id"]}`}>{user["_id"].slice(0,5)}..</Link></td>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td>{user.phone}</td>
