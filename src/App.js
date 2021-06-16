@@ -13,7 +13,7 @@ import UserSeperatePage from './pages/users/users-seperate.page'
 import LoginPage from './pages/login/login.page'
 // Components
 import Header from "./components/header/header.component"
-
+import CouponsPage from './pages/coupons/users.page'
 import './App.css';
 import { createContext, useContext, useState } from 'react'
 
@@ -43,6 +43,7 @@ function App() {
           <Route exact path="/cars" component={CarsPage} />
           <Route exact path="/users" component={UsersPage} />
           <Route exact path="/users/:id" render={(props) => <UserSeperatePage id={props.match.params.id} />} />
+          <Route exact path="/coupons" component={CouponsPage} />
       </Switch>
       </div>
     </div>)
