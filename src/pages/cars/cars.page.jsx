@@ -3,20 +3,58 @@ import "./cars.styles.css"
 import { Link } from 'react-router-dom';
 
 import Card from '../../components/card/card.component'
+import API from '../../api/api'
 
+
+let allCar = [  ]
 class CarsPage extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            allCars: [],
+            searchName: "",
+            searchType: "",
+            searchBrand: "",
+        }
+    }
+
+    async componentDidMount() {
+        const token = await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"})
+        const allCars = await (await API.get("cars/", {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
+        allCar = allCars.cars
+
+        this.setState({allCars: allCars.cars})
+    }
+    
+    handleValueChange = (e) => {
+        // if (e.target.name == "searchName") this.setState({ [e.target.name]: e.target.value, allCars: allCar.filter(val => val.name.toLowerCase().includes(e.target.value)) });
+        // if (e.target.name == "searchType") this.setState({ [e.target.name]: e.target.value, allCars: allCar.filter(val => val.type.toLowerCase().includes(e.target.value)) });
+        this.setState({ [e.target.name]: e.target.value}, () => {
+            // let myFilteredCars;
+            // if ()
+            let myFilteredCars = allCar.filter(val => val.name.toLowerCase().includes(this.state.searchName))
+            myFilteredCars = myFilteredCars.filter(val => val.type.toLowerCase().includes(this.state.searchType))
+            myFilteredCars = myFilteredCars.filter(val => val.brand.toLowerCase().includes(this.state.searchBrand))
+            this.setState({
+                allCars: myFilteredCars
+            })
+        })
+    }
+    
     render() {
+
         return (
             <div className="OrdersPage">
                 <Card customClass="custom-card-sep">
                     <label>
                         Search By Name
-                        <input placeholder="Search By Name" type="text" name="" id="" />
+                        <input value={this.state.searchName} onChange={this.handleValueChange} placeholder="Search By Name" type="text" name="searchName" id="" />
                     </label>
                     <label>
                         <div className="Addspace"></div>
                         Search By Type 
-                        <select name="Type" id="">
+                        <select value={this.state.searchType} onChange={this.handleValueChange} name="searchType" id="">
                             <option value="sports">Sports</option>
                             <option value="luxury">Luxury</option>
                             <option value="special">Special</option>
@@ -66,17 +104,22 @@ class CarsPage extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>FERRARI 276</td>
-                            <td>SUV</td>
-                            <td>Lamborghini</td>
-                            <td>4</td>
-                            <td>250</td>
-                            <td>170 AED</td>
-                            <td>170 AED</td>
-                            <td>170 AED</td>
-                            <td>9876545642</td>
-                        </tr>
+                        {
+                            this.state.allCars.map((car, idx) => {
+                            console.log("here")
+                            return <tr key={`carsid-${idx}`}>
+                                <td>{car.name}</td>
+                                <td>{car.type}</td>
+                                <td>{car.brand}</td>
+                                <td>{car.ratings}</td>
+                                <td>{car.KMIncluded}</td>
+                                <td>{car.hourlyRate}</td>
+                                <td>{car.perDayRate}</td>
+                                <td>{car.preDeposit}</td>
+                                <td>{car.contact}</td>
+                            </tr>
+                            })
+                        }
                     </tbody>
                 </table>
                 </Card>

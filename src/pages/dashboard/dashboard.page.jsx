@@ -51,8 +51,7 @@ class Dashboard extends Component {
       const newArr = await ordersHome(filterByDates("year", allOrders))
       const ArrOfBrands = await topSellingBrands(allOrders)
       const ArrOfCategory = await topSellingCategory(allOrders)
-      const ArrOfCars = await topSellingCarsWithName(allOrders)
-      console.log(ArrOfCategory)
+      // const ArrOfCars = await topSellingCarsWithName(allOrders)
       this.setState({
         MiniWidget: {
           ...this.state.MiniWidget,
@@ -64,8 +63,9 @@ class Dashboard extends Component {
         salesChart: {labels: newArr["names"], values: newArr["value"]},
         brandsChart: ArrOfBrands,
         categoryChart: ArrOfCategory,
-        carsChart: ArrOfCars,
+        // carsChart: ArrOfCars,
       })
+      console.log(this.state)
       // const newArr = await topSellingCategory(filterByDates("year", allOrders))
       // const newArr = await topSellingBrands(filterByDates("year", allOrders))
       // console.log(newArr)
@@ -73,7 +73,7 @@ class Dashboard extends Component {
       // const orderHome = await OrderHome(filterByDates("year", allOrders), "19 May 2021", null, "Ferrari")
       // console.log(myarr)
     } catch(e) {
-      console.log(e.message)
+      console.log(e)
     }
     }
 
