@@ -59,14 +59,18 @@
   margin-bottom: 10px;
 }
 
+.CarSeperate li {
+  margin-left: 2.5rem;
+}
 
 .CarNewForm {
   padding: 2rem;
   color: white;
 }
 
-.CarNewForm input, .CarNewForm select {
-  padding: .5rem 1rem;
+.CarNewForm input,
+.CarNewForm select {
+  padding: 0.5rem 1rem;
   width: 100%;
   border: none;
   border-radius: 4px;
@@ -79,7 +83,6 @@
 
 .CarNewForm input:focus,
 .CarNewForm select:focus {
-
   outline: none;
   border: white;
 }
@@ -94,12 +97,10 @@
   font-weight: 600;
 }
 
-
-
 .CarNewForm .fileupload {
   cursor: pointer;
   margin-top: 12px;
-  padding: .7rem 1rem;
+  padding: 0.7rem 1rem;
   border-radius: 7px;
   background: #242424;
 }

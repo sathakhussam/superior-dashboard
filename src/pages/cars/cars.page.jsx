@@ -92,7 +92,7 @@ class CarsPage extends Component {
                 <Card customClass="custom-card">
                 <div className="top-div">
                     <h3>All Available Cars</h3>
-                    <Link className="btn btn-primary" to="/cars/new">Add new</Link>
+                    <Link className="btn btn-primary" to="/cars/create/new">Add new</Link>
                 </div>
                 <table class="rtable">
                     <thead>

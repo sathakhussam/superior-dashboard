@@ -36,10 +36,10 @@ function App() {
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/cars" component={CarsPage} />
           <Route exact path="/cars/:id" render={(props) => <CarSeperatePage id={props.match.params.id} />} />
-          <Route exact path="/cars/new" component={CarsNewPage} />
+          <Route exact path="/cars/create/new" component={CarsNewPage} />
           <Route exact path="/orders" component={OrdersPage} />
           <Route exact path="/orders/:id" render={(props) => <SeperateOrdersPage id={props.match.params.id} />} />
-          <Route exact path="/orders/new" component={OrdersCreatePage} />
+          <Route exact path="/orders/create/new" component={OrdersCreatePage} />
           <Route exact path="/cars" component={CarsPage} />
           <Route exact path="/users" component={UsersPage} />
           <Route exact path="/users/:id" render={(props) => <UserSeperatePage id={props.match.params.id} />} />
