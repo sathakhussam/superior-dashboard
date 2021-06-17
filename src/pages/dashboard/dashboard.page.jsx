@@ -23,6 +23,8 @@ class Dashboard extends Component {
     
     this.state = {
       choice: "year",
+      allOrders: [],
+      allUsers: [],
       MiniWidget: {
         totalRevenue: 0,
             totalOrders: 0,
@@ -39,19 +41,48 @@ class Dashboard extends Component {
         }
     }
     
+    customChange = async (e) => {
+      this.setState({
+        [e.target.name] : e.target.value
+      }, this.customChangeHandler)
+    }
+
+    customChangeHandler = async () => {
+      const filteredOrders = filterByDates(this.state.choice, this.state.allOrders)
+      const newArr = await ordersHome(filterByDates(this.state.choice == "custom" ? "year" : this.state.choice, this.state.allOrders), this.state.choice == "custom" ? "year" : this.state.choice)
+      const ArrOfBrands = await topSellingBrands(filteredOrders)
+      const ArrOfCategory = await topSellingCategory(filteredOrders)
+      const ArrOfCars = await topSellingCarsWithName(filteredOrders)
+      console.log(ArrOfCars)
+      this.setState({
+        MiniWidget: {
+          ...this.state.MiniWidget,
+          totalRevenue: filteredOrders.map(item => parseFloat(item.cost)).reduce((a,b) => a+b,0),
+          totalOrders: filteredOrders.length,
+          totalCustomers: this.state.allUsers.length,
+          // growth: filteredOrders.map(item => item.cost).reduce((a,b) => a+b,0) - prevData.map(item => item.cost).reduce((a,b) => a+b,0)/prevData.map(item => item.cost).reduce((a,b) => a+b,0),
+        },
+        salesChart: {labels: newArr["names"], values: newArr["value"]},
+        brandsChart: ArrOfBrands,
+        categoryChart: ArrOfCategory,
+        carsChart: ArrOfCars,
+      })
+    }
+ 
     async componentDidMount() {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
       try {
       const token = await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"})
       this.setState({token: token.data.token})
       const allOrders = await (await API.get("orders/", {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
       const allUsers = await (await API.get("users/", {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
-
-      const filteredOrders = filterByDates(this.state.choice, allOrders)
-      const newArr = await ordersHome(filterByDates("week", allOrders), "week")
-      const ArrOfBrands = await topSellingBrands(allOrders)
-      const ArrOfCategory = await topSellingCategory(allOrders)
-      const ArrOfCars = await topSellingCarsWithName(allOrders)
+      this.setState({
+        allOrders,allUsers
+      })
+      const filteredOrders = filterByDates(this.state.choice, this.state.allOrders)
+      const newArr = await ordersHome(filterByDates("week", this.state.allOrders), "week")
+      const ArrOfBrands = await topSellingBrands(filteredOrders)
+      const ArrOfCategory = await topSellingCategory(filteredOrders)
+      const ArrOfCars = await topSellingCarsWithName(filteredOrders)
       console.log(ArrOfCars)
       this.setState({
         MiniWidget: {
@@ -66,12 +97,6 @@ class Dashboard extends Component {
         categoryChart: ArrOfCategory,
         carsChart: ArrOfCars,
       })
-      // const newArr = await topSellingCategory(filterByDates("year", allOrders))
-      // const newArr = await topSellingBrands(filterByDates("year", allOrders))
-      // console.log(newArr)
-
-      // const orderHome = await OrderHome(filterByDates("year", allOrders), "19 May 2021", null, "Ferrari")
-      // console.log(myarr)
     } catch(e) {
       console.log(e)
     }
@@ -83,10 +108,10 @@ class Dashboard extends Component {
                 <Card customClass="custom-card custom-card-searchby">
                   <label>
                     Sort By 
-                  <select className="searchby" name="SearchBy" id="">
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                    <option value="yearly">Yearly</option>
+                  <select value={this.state.choice} onChange={this.customChange} className="searchby" name="choice" id="">
+                    <option value="year">Yearly</option>
+                    <option value="month">Monthly</option>
+                    <option value="week">Weekly</option>
                     <option value="custom">Custom</option>
                   </select>
                   </label>
