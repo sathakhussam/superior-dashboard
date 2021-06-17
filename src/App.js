@@ -51,7 +51,10 @@ function App() {
   let displaay = null
   const currurl = useLocation().pathname
   console.log(loggedIn)
-  if ((currurl === "/n/login" || currurl === "/l/login") && loggedIn===false){
+  if (currurl === "/l/login") {
+    displaay = <Route exact path="/:type/login" render={(props) => <LoginPage loginState={{loggedIn, ChangeLogIn}} {...props} />} />
+  }
+  else if ((currurl === "/n/login" || currurl === "/l/login") && loggedIn===false){
     displaay = <Route exact path="/:type/login" render={(props) => <LoginPage loginState={{loggedIn, ChangeLogIn}} {...props} />} />
   }
   else if ((currurl === "/n/login" || currurl === "/l/login") && loggedIn===true){

@@ -1,65 +1,71 @@
 .LoginPage {
-    height: 100vh;
-    color: white;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    align-items: center;
-    
+  height: 100vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
 }
 
 .LoginPage section {
-    padding: 1.5rem;
-    background-color: #4f4f4f;
-    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  padding: 1.5rem;
+  background-color: #4f4f4f;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .LoginPage section h2 {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .LoginPage input {
-    background-color: #242424;
-    padding: 0;
-    margin: 0;
-    margin-bottom: 1rem;
-    border: none;
-    border-radius: 2.3px;
-    color: white;
-    width: 100%;
-    padding: .5rem 1.5rem;
+  background-color: #242424;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 2.3px;
+  color: white;
+  width: 100%;
+  padding: 0.5rem 1.5rem;
 }
 
 .LoginPage input:focus {
-    outline: none;
+  outline: none;
 }
 
-
 .LoginPage button {
-    color: white;
-    background-color: #f5bb11;
-    border: none;
-    width: 100%;
-    border-radius: 5px;
-    padding: .5rem 1rem;
-    font-weight: 600;
+  color: white;
+  background-color: #f5bb11;
+  border: none;
+  width: 100%;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
 }
 
 .LoginPage section a {
-    transition: .3s all;
+  transition: 0.3s all;
 }
 .LoginPage section a:hover {
-    color: #f5bb11;
+  color: #f5bb11;
 }
 
 .LoginPage section p {
-    margin-top: 1rem;
-    font-size: 14px;
+  margin-top: 1rem;
+  font-size: 14px;
+}
 
+.LoginPage .errorBox {
+  background-color: #ff949485;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  color: #111;
 }

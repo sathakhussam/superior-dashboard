@@ -9,7 +9,7 @@ function Header(props) {
         <div className="Header">
             <h2>Superior Rental</h2>
             <div>
-            <Link to="l/login" className="btn btn-primary">Logout</Link>
+            <Link to="logout" className="btn btn-primary">Logout</Link>
             <div className="avatar"></div>
             </div>
         </div>
