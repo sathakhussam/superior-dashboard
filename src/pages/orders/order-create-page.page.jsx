@@ -97,8 +97,9 @@ const CarNewForm = () => {
             <input name="carImageUrl" value={myForm.inputs.carImageUrl} onChange={myForm.handleInputChange} type="text" required placeholder="Car Image URL" />
             <input name="car" value={myForm.inputs.car} onChange={myForm.handleInputChange} type="text" required placeholder="Car ID" />
             <input name="user" value={myForm.inputs.user} onChange={myForm.handleInputChange} type="text" required placeholder="User ID" />
-            <input name="userPhone" value={myForm.inputs.userPhone} onChange={myForm.handleInputChange} type="text" required placeholder="User Phone" />
+            <input name="userPhone" value={myForm.inputs.userPhone} onChange={myForm.handleInputChange} type="number" required placeholder="User Phone" />
             <select name="bookByDays" value={myForm.inputs.bookByDays} onChange={myForm.handleInputChange} id="">
+                <option value="">Select How you want to book</option>
                 <option value={true}>True</option>
                 <option value={false}>False</option>
             </select>
@@ -109,13 +110,18 @@ const CarNewForm = () => {
             <input name="numberOfHours" value={myForm.inputs.numberOfHours} onChange={myForm.handleInputChange} type="number" required placeholder="No Of Hours" />
             <input name="pickUpLocation" value={myForm.inputs.pickUpLocation} onChange={myForm.handleInputChange} type="text" required placeholder="Pickup Location" />
             <input name="dropLocation" value={myForm.inputs.dropLocation} onChange={myForm.handleInputChange} type="text" required placeholder="Drop Location" />
-            <input name="cost" value={myForm.inputs.cost} onChange={myForm.handleInputChange} type="text" required placeholder="Cost" />
-            <input name="VAT" value={myForm.inputs.VAT} onChange={myForm.handleInputChange} type="text" required placeholder="VAT" />
-            <input name="subtotal" value={myForm.inputs.subtotal} onChange={myForm.handleInputChange} type="text" required placeholder="Subtotal" />
-            <input name="resourceCost" value={myForm.inputs.resourceCost} onChange={myForm.handleInputChange} type="text" required placeholder="Resource Cost" />
-            <input name="durationCost" value={myForm.inputs.durationCost} onChange={myForm.handleInputChange} type="text" required placeholder="Duration Cost" />
-            <input name="depositAmount" value={myForm.inputs.depositAmount} onChange={myForm.handleInputChange} type="text" required placeholder="Deposit Amount" />
-            <input name="method" value={myForm.inputs.method} onChange={myForm.handleInputChange} type="text" required placeholder="Method" />
+            <input name="cost" value={myForm.inputs.cost} onChange={myForm.handleInputChange} type="number" required placeholder="Cost" />
+            <input name="VAT" value={myForm.inputs.VAT} onChange={myForm.handleInputChange} type="number" required placeholder="VAT" />
+            <input name="subtotal" value={myForm.inputs.subtotal} onChange={myForm.handleInputChange} type="number" required placeholder="Subtotal" />
+            <input name="resourceCost" value={myForm.inputs.resourceCost} onChange={myForm.handleInputChange} type="number" required placeholder="Resource Cost" />
+            <input name="durationCost" value={myForm.inputs.durationCost} onChange={myForm.handleInputChange} type="number" required placeholder="Duration Cost" />
+            <input name="depositAmount" value={myForm.inputs.depositAmount} onChange={myForm.handleInputChange} type="number" required placeholder="Deposit Amount" />
+            <select name="method" value={myForm.inputs.bookByDays} onChange={myForm.handleInputChange} id="">
+                <option value="">Select Paymenth Method</option>
+                <option value="amex">Amex</option>
+                <option value="apple">Apple pay</option>
+                <option value="cards">Card</option>
+            </select>
             <label class="container">
             <p>Additional Driver</p>
             <input type="checkbox" name="additionalDriver" value={myForm.inputs.resources.additionalDriver} onClick={myForm.insideInputChange}/>

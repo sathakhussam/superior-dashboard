@@ -136,10 +136,10 @@ const CarNewForm = () => {
             <h3>Create A New Form</h3>
             <input type="text" name="carName" onChange={myForm.handleInputChange} value={myForm.inputs.carName} required placeholder="Car Name" />
             <input type="text" name="description" onChange={myForm.handleInputChange} value={myForm.inputs.description} required placeholder="Description" />
-            <input type="text" name="KMIncluded" onChange={myForm.handleInputChange} value={myForm.inputs.KMIncluded} required placeholder="KM Included" />
-            <input type="text" name="hourlyRate" onChange={myForm.handleInputChange} value={myForm.inputs.hourlyRate} required placeholder="Hourly Rate" />
-            <input type="text" name="perDayRate" onChange={myForm.handleInputChange} value={myForm.inputs.perDayRate} required placeholder="Per Day Rate" />
-            <input type="text" name="preDeposit" onChange={myForm.handleInputChange} value={myForm.inputs.preDeposit} required placeholder="Pre Deposit" />
+            <input type="number" name="KMIncluded" onChange={myForm.handleInputChange} value={myForm.inputs.KMIncluded} required placeholder="KM Included" />
+            <input type="number" name="hourlyRate" onChange={myForm.handleInputChange} value={myForm.inputs.hourlyRate} required placeholder="Hourly Rate" />
+            <input type="number" name="perDayRate" onChange={myForm.handleInputChange} value={myForm.inputs.perDayRate} required placeholder="Per Day Rate" />
+            <input type="number" name="preDeposit" onChange={myForm.handleInputChange} value={myForm.inputs.preDeposit} required placeholder="Pre Deposit" />
             <input type="text" name="contact" onChange={myForm.handleInputChange} value={myForm.inputs.contact} required placeholder="Contact Number" />
             <input type="text" name="whatsappNumber" onChange={myForm.handleInputChange} value={myForm.inputs.whatsappNumber} required placeholder="Whatsapp Number" />
             <select name="type" value={myForm.inputs.type} onChange={myForm.handleInputChange} id="">

@@ -13,7 +13,12 @@
 .Header .avatar {
   border-radius: 50%;
   height: 35px;
+  margin-left: 1rem;
   width: 35px;
   background: url("https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80")
     center center/cover;
+}
+
+.Header div {
+  display: flex;
 }

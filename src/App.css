@@ -34,6 +34,7 @@
   padding: 0.4rem 1rem;
   border-radius: 10px;
   font-weight: 600;
+  border: none;
 }
 
 .btn-primary {
@@ -129,6 +130,9 @@
   border-left: 0;
 }
 
+.rtable a {
+  color: #f5bb11;
+}
 .rtable--flip th:not(:last-child),
 .rtable--flip td:not(:last-child) {
   border-bottom: 0;

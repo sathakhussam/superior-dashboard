@@ -12,7 +12,7 @@ const LoginPage = (props) => {
         if (jwt) props.loginState.ChangeLogIn(true)
       } else if (type == "l") {
         props.loginState.ChangeLogIn(false)
-        localStorage.setItem("jwt", null)
+        localStorage.removeItem("jwt")
       }
     }, [])
     return ( 
