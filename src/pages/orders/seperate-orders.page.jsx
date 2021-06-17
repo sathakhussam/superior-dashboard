@@ -19,6 +19,7 @@ const SeperateOrderPage = (props) => {
             <h3>Orders Details</h3>                    
             <p>Car : <Link to={`/cars/${order.car}`}>{order.carName}</Link></p>
             <p>User : <Link to={`/users/${order.user}`}>Sathak Hussam</Link></p>
+            <p>carID : <b>{order.car}</b></p>           
             <p>userPhone : <b>{order.userPhone}</b></p>           
             <p>Pickup Time : <b>{order.pickUpTime}</b></p>           
             <p>Pickup Date : <b>{order.pickUpDate}</b></p>           

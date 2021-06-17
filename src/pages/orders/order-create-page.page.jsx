@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Card from '../../components/card/card.component'
 import API from '../../api/api'
 
-const CarNewForm = () => {
+const CarNewForm = (props) => {
+        const [msg, changeMsg] = useState("")
         const useForms = () => {
         const [inputs, setInputs] = useState({
             carName: "",
@@ -35,41 +36,46 @@ const CarNewForm = () => {
             }
         });
         const handleSubmit = async (event) => {
-          if (event) {
-            event.preventDefault();
-            const myform = {
-                "car": inputs.car,
-                "numberOfHours": inputs.numberOfHours,
-                "user": inputs.user,
-                "carName": inputs.carName,
-                "bookByDays": inputs.bookByDays,
-                "dropTime": inputs.dropTime,
-                "dropDate": inputs.dropDate,
-                "method": inputs.method,
-                "dropLocation": inputs.dropLocation,
-                "pickUpLocation" : inputs.pickUpLocation,
-                "pickUpTime": inputs.pickUpTime,
-                "pickUpDate": inputs.pickUpDate,
-                "depositAmount": inputs.depositAmount,
-                "resourceCost": inputs.resourceCost,
-                "subtotal": inputs.subtotal,
-                "durationCost": inputs.durationCost,
-                "VAT": inputs.VAT,
-                "cost": inputs.cost,
-                "carImages": inputs.carImageUrl,
-                "userPhone": inputs.userPhone,
-                "resources": {
-                    "Additional Driver": inputs.resources.additionalDriver,
-                    "Baby seat": inputs.resources.babySeat,
-                    "Outside Dubai": inputs.resources.deliveryOutsideDubai,
-                    "Extra 25KM": inputs.resources.extra25KM,
-                    "Extra 50KM": inputs.resources.extra50KM,
-                    "Delivery Full Insurance": inputs.resources.fullInsurance,
+            try{
+                if (event) {
+                  event.preventDefault();
+                  const myform = {
+                      "car": inputs.car,
+                      "numberOfHours": inputs.numberOfHours,
+                      "user": inputs.user,
+                      "carName": inputs.carName,
+                      "bookByDays": inputs.bookByDays,
+                      "dropTime": inputs.dropTime,
+                      "dropDate": inputs.dropDate,
+                      "method": inputs.method,
+                      "dropLocation": inputs.dropLocation,
+                      "pickUpLocation" : inputs.pickUpLocation,
+                      "pickUpTime": inputs.pickUpTime,
+                      "pickUpDate": inputs.pickUpDate,
+                      "depositAmount": inputs.depositAmount,
+                      "resourceCost": inputs.resourceCost,
+                      "subtotal": inputs.subtotal,
+                      "durationCost": inputs.durationCost,
+                      "VAT": inputs.VAT,
+                      "cost": inputs.cost,
+                      "carImages": inputs.carImageUrl,
+                      "userPhone": inputs.userPhone,
+                      "resources": {
+                          "Additional Driver": inputs.resources.additionalDriver,
+                          "Baby seat": inputs.resources.babySeat,
+                          "Outside Dubai": inputs.resources.deliveryOutsideDubai,
+                          "Extra 25KM": inputs.resources.extra25KM,
+                          "Extra 50KM": inputs.resources.extra50KM,
+                          "Delivery Full Insurance": inputs.resources.fullInsurance,
+                      }
+                  }
+                  const token = localStorage.getItem("jwt")
+                  const res = await (await API.post("orders/", myform, {headers: {"Authorization": `Bearer ${token}`}}))    
+                  props.history.push("/orders")
                 }
+            } catch(e) {
+                changeMsg(e.response.data.message)
             }
-            const token = localStorage.getItem("jwt")
-            const res = await (await API.post("orders/", myform, {headers: {"Authorization": `Bearer ${token}`}}))    
-          }
         }
         const handleInputChange = (event) => {
         //   event.persist();
@@ -90,6 +96,10 @@ const CarNewForm = () => {
     const myForm = useForms()
     return ( 
     <div className="CarNewForm">
+        {
+            msg ?
+            <div className="errorBox">{msg}</div> : null
+        }
         <Card>
             <form method="POST" onSubmit={myForm.handleSubmit} encType="multipart/form-data">
             <h3>Create A New Order</h3>

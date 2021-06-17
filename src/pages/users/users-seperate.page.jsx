@@ -47,6 +47,7 @@ const UsersSeperate = (props) => {
                     <div>
                         <h3>User Details</h3>                    
                         <p>Name : <b>{user.name}</b></p>
+                        <p>UserID : <b>{user._id}</b></p>
                         <p>Email : <b>{user.email}</b></p>
                         <p>Phone : <b>{user.phone}</b></p>
                         {
