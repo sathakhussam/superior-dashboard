@@ -13,7 +13,7 @@ class OrdersPage extends Component {
             allOrders: [],
             searchDate: "",
             allOrderss: [],
-            customDate: "2021-01-01",
+            customDate: "2021-02-01",
         }
     }
 
@@ -27,8 +27,7 @@ class OrdersPage extends Component {
         this.setState({ [e.target.name]: e.target.value}, () => {
             let myFilteredCars;
             if (this.state.searchDate == "custom") myFilteredCars = filterByDate(this.state.searchDate, this.state.allOrderss, this.state.customDate)
-            myFilteredCars = filterByDate(this.state.searchDate, this.state.allOrderss)
-            console.log(myFilteredCars)
+            else myFilteredCars = filterByDate(this.state.searchDate, this.state.allOrderss)
             this.setState({
                 allOrders: myFilteredCars
             })
@@ -40,17 +39,20 @@ class OrdersPage extends Component {
             <div className="OrdersPage">
                 <div>
                 <Card customClass="custom-card custom-card-searchby">
-                  <label>
+                <label>
                     Sort By 
-                  <select className="searchby" name="searchDate" value={this.state.searchDate} onChange={this.handleValueChange}>
-                    <option value="week">Weekly</option>
-                    <option value="month">Monthly</option>
+                  <select value={this.state.searchDate} onChange={this.handleValueChange} className="searchby" name="searchDate" id="">
                     <option value="year">Yearly</option>
+                    <option value="month">Monthly</option>
+                    <option value="week">Weekly</option>
                     <option value="custom">Custom</option>
                   </select>
                   </label>
                   {
-                      this.state.searchDate == "custom" ? <input type="date" name="customDate" value={this.state.searchDate} onChange={this.handleValueChange} id="" className="myowninput" /> : null
+                    this.state.searchDate == "custom" ?
+                    <input type="date" name="customDate" value={this.state.customDate} onChange={this.handleValueChange} id="" className="myowninput" />
+                    :
+                    null
                   }
                 </Card>
                 </div>
