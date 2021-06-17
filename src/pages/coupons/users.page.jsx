@@ -17,8 +17,8 @@ class OrdersPage extends Component {
     }
 
     async componentDidMount() {
-        const token = await (await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"}))
-        const allUsers = await (await API.get("coupons/", {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
+        const token = localStorage.getItem("jwt")
+        const allUsers = await (await API.get("coupons/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
         this.setState({allUsers: allUsers})
         console.log(this.state.allUsers)
     }
@@ -30,8 +30,8 @@ class OrdersPage extends Component {
 
     customSubmit = async (e) => {
         e.preventDefault()
-        const token = await (await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"}))
-        const allUsers = await (await API.post("coupons/", {type: this.state.searchType, value:this.state.searchName},{headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
+        const token = localStorage.getItem("jwt")
+        const allUsers = await (await API.post("coupons/", {type: this.state.searchType, value:this.state.searchName},{headers: {"Authorization": `Bearer ${token}`}})).data.data
 
         this.setState({searchType: "", searchName: "", newCoupon: true}, () => setTimeout(this.setState({newCoupon: false}), 1000)) 
     }

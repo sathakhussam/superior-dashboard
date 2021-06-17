@@ -1,0 +1,39 @@
+@media only screen and (max-width: 750px) {
+  .beforeApp .App .sidebar {
+    display: none;
+  }
+
+  .Dashboard .Mini-widget {
+    flex-direction: column;
+  }
+
+  .Dashboard .Mini-widget .Custom-card.component {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  .Dashboard .Mini-widget .Custom-card.component:last-child {
+    margin-bottom: -0.5rem;
+  }
+  .Dashboard .TripleCharts {
+    flex-direction: column;
+  }
+  .Dashboard {
+    height: 350vh;
+  }
+  .Dashboard .TripleCharts .custom-card {
+    margin: 0;
+    margin-bottom: 16px;
+  }
+  .LoginPage section.hello {
+    margin: 1rem !important;
+  }
+
+  div .subHeader {
+    display: block;
+  }
+  .subHeader .links {
+    display: flex;
+    justify-content: space-evenly;
+    font-weight: 500;
+  }
+}

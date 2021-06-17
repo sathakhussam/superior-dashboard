@@ -58,7 +58,9 @@ const CarNewForm = () => {
         let fd = new FormData();
         console.log(files)
         fd.append("name", thevartopass.carName)
-        fd.append("photos", files)
+        fd.append("photos", files[0])
+        fd.append("photos", files[1])
+        fd.append("photos", files[2])
         fd.append("description", thevartopass.description)
         fd.append("KMIncluded", thevartopass.KMIncluded)
         fd.append("preDeposit", thevartopass.preDeposit)
@@ -68,23 +70,11 @@ const CarNewForm = () => {
         fd.append("whatsappNumber", thevartopass.whatsappNumber)
         fd.append("type", thevartopass.type)
         fd.append("brand", thevartopass.brand)
-        fd.append("relatedVideos", [thevartopass.relatedVideos1, thevartopass.relatedVideos2, thevartopass.relatedVideos3])
-        // const myVar = {
-        //     "name" : thevartopass.carName,
-        //     "photos": thevartopass.images,
-        //     "description": thevartopass.description,
-        //     "KMIncluded": thevartopass.KMIncluded,
-        //     "preDeposit": thevartopass.preDeposit,
-        //     "hourlyRate": thevartopass.hourlyRate,
-        //     "perDayRate": thevartopass.perDayRate,
-        //     "contact": thevartopass.contact,
-        //     "whatsappNumber": thevartopass.whatsappNumber,
-        //     "type": thevartopass.type,
-        //     "brand": thevartopass.brand,
-        //     "relatedVideos": [thevartopass.relatedVideos1, thevartopass.relatedVideos2, thevartopass.relatedVideos3]
-        // }
-        const token = await (await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"}))
-        const res = await (await API.patch("cars/", fd, {headers: {"Authorization": `Bearer ${token.data.token}`,'content-type': 'multipart/form-data'}}))
+        fd.append("relatedVideos", thevartopass.relatedVideos1)
+        fd.append("relatedVideos", thevartopass.relatedVideos2)
+        fd.append("relatedVideos", thevartopass.relatedVideos3)
+        const token = localStorage.getItem("jwt")
+        const res = (await API.patch("cars/", fd, {headers: {"Authorization": `Bearer ${token}`,'content-type': 'multipart/form-data'}}))
         return res
     }
 

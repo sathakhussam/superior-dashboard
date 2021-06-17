@@ -21,7 +21,7 @@ class CarsPage extends Component {
 
     async componentDidMount() {
         const token = await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"})
-        const allCars = await (await API.get("cars/", {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
+        const allCars = await (await API.get("cars/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
         allCar = allCars.cars
 
         this.setState({allCars: allCars.cars})
@@ -113,7 +113,7 @@ class CarsPage extends Component {
                             this.state.allCars.map((car, idx) => {
                             console.log("here")
                             return <tr key={`carsid-${idx}`}>
-                                <td><Link to="/cars/seperate">{car.name}</Link></td>
+                                <td><Link to={`cars/${car["_id"]}`}>{car.name}</Link></td>
                                 <td>{car.type}</td>
                                 <td>{car.brand}</td>
                                 <td>{car.ratings}</td>

@@ -17,7 +17,7 @@ const Carousel = (props) => {
                 {
                     props.images.map((val, idx) => {
                         return (
-                            <div style={{background: `url(${val.url}) center center/cover`}} id={`slide-${idx + 1}`}>
+                            <div style={{background: `url(${val}) center center/cover`}} id={`slide-${idx + 1}`}>
                                 {/* <img className="CarouselImages" src={val.url} alt="" /> */}
                             </div>
                         )

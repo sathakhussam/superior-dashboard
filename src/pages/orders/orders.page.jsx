@@ -18,8 +18,8 @@ class OrdersPage extends Component {
     }
 
     async componentDidMount() {
-        const token = await (await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"}))
-        const allOrders = await (await API.get("orders/", {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
+        const token = localStorage.getItem("jwt")
+        const allOrders = await (await API.get("orders/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
         this.setState({allOrders: allOrders, allOrderss: allOrders})
     }
     
@@ -57,7 +57,7 @@ class OrdersPage extends Component {
                 <Card customClass="custom-card">
                 <div className="top-div">
                     <h3>All available users</h3>
-                    <Link className="btn btn-primary" href="#">Place Order</Link>
+                    <Link className="btn btn-primary" to="orders/create/new">Place Order</Link>
                 </div>
                 <table className="rtable">
                     <thead>

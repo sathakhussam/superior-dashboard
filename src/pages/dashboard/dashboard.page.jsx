@@ -72,10 +72,10 @@ class Dashboard extends Component {
  
     async componentDidMount() {
       try {
-      const token = await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"})
-      this.setState({token: token.data.token})
-      const allOrders = await (await API.get("orders/", {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
-      const allUsers = await (await API.get("users/", {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
+      const token = localStorage.getItem("jwt")
+      this.setState({token: token})
+      const allOrders = await (await API.get("orders/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
+      const allUsers = await (await API.get("users/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
       this.setState({
         allOrders,allUsers
       })

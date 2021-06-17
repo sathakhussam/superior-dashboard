@@ -67,8 +67,8 @@ const CarNewForm = () => {
                     "Delivery Full Insurance": inputs.resources.fullInsurance,
                 }
             }
-            const token = await (await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"}))
-            const res = await (await API.post("orders/", myform, {headers: {"Authorization": `Bearer ${token.data.token}`}}))    
+            const token = localStorage.getItem("jwt")
+            const res = await (await API.post("orders/", myform, {headers: {"Authorization": `Bearer ${token}`}}))    
           }
         }
         const handleInputChange = (event) => {

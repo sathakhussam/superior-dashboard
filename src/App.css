@@ -133,3 +133,9 @@
 .rtable--flip td:not(:last-child) {
   border-bottom: 0;
 }
+
+.subHeader {
+  display: none;
+  background-color: #f5bb11;
+  padding: 1rem;
+}

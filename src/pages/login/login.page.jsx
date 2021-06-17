@@ -17,7 +17,7 @@ const LoginPage = (props) => {
     }, [])
     return ( 
         <div className="LoginPage">
-            <section>
+            <section className="hello" style={{"margin": "1rem"}}>
                 <h2>Superior Rental</h2>
                 <form onSubmit={(evt) => handleSubmit(evt, props.loginState)}>
                     <input name="email" value={inputs.email} onChange={handleInputChange} type="email" placeholder="Email"/>

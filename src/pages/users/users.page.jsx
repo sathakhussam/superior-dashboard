@@ -16,8 +16,8 @@ class OrdersPage extends Component {
     }
 
     async componentDidMount() {
-        const token = await (await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"}))
-        const allUsers = await (await API.get("users/", {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
+        const token = localStorage.getItem("jwt")
+        const allUsers = await (await API.get("users/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
         this.setState({allUsers: allUsers, allUserss: allUsers})
         console.log(this.state.allUsers)
     }

@@ -8,8 +8,8 @@ const SeperateOrderPage = (props) => {
     const [order, changeOrder] = useState({resources: {}})
     
     useEffect(async () => {
-        const token = await (await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"}))
-        const orders = await (await API.get(`orders/${props.id}`, {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
+        const token = localStorage.getItem("jwt")
+        const orders = await (await API.get(`orders/${props.id}`, {headers: {"Authorization": `Bearer ${token}`}})).data.data
         changeOrder(orders)
         console.log(orders)
     }, [])

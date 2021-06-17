@@ -27,6 +27,7 @@ function App() {
           <Link to="/orders">Orders</Link>
           <Link to="/cars">Cars</Link>
           <Link to="/users">Users</Link>
+          <Link to="/coupons">Coupons</Link>
         </div>
       </div>
       <div className="content">
@@ -37,8 +38,8 @@ function App() {
           <Route exact path="/cars/:id" render={(props) => <CarSeperatePage id={props.match.params.id} />} />
           <Route exact path="/cars/create/new" component={CarsNewPage} />
           <Route exact path="/orders" component={OrdersPage} />
-          <Route exact path="/orders/:id" render={(props) => <SeperateOrdersPage id={props.match.params.id} />} />
           <Route exact path="/orders/create/new" component={OrdersCreatePage} />
+          <Route exact path="/orders/:id" render={(props) => <SeperateOrdersPage id={props.match.params.id} />} />
           <Route exact path="/cars" component={CarsPage} />
           <Route exact path="/users" component={UsersPage} />
           <Route exact path="/users/:id" render={(props) => <UserSeperatePage id={props.match.params.id} />} />
@@ -54,7 +55,7 @@ function App() {
     displaay = <Route exact path="/:type/login" render={(props) => <LoginPage loginState={{loggedIn, ChangeLogIn}} {...props} />} />
   }
   else if ((currurl === "/n/login" || currurl === "/l/login") && loggedIn===true){
-    displaay = <Redirect to="/" />
+    displaay = <Redirect to={currurl == '/n/login' ? '/' : currurl} />
   }
   else if ((currurl === "/n/login" || currurl === "/l/login") && loggedIn===false) {
     displaay = <Redirect to="/n/login" />
@@ -63,8 +64,12 @@ function App() {
     displaay = <Redirect to="/l/login" />
     // ChangeLogIn(false)
   } 
-  else if (currurl != "/n/login" && loggedIn === true) {
+  else if (loggedIn === false) {
+    displaay = <Redirect to="/n/login" />
+  }
+  else {
     displaay = tobeReturn
+
   }
   // if (currurl === '/login' && loggedIn.login === false) {
   //   displaay = <Route exact path="/login" render={(props) => <LoginPage loginState={{loggedIn, ChangeLogIn}} {...props} />} />

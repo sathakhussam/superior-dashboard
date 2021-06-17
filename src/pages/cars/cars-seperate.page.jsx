@@ -5,15 +5,15 @@ import Carousel from '../../components/carousel/carousel.component'
 import API from '../../api/api'
 
 const images = [
-    { url: "https://images.unsplash.com/photo-1622569535114-bf7d4d57fe2d?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDN8NnNNVmpUTFNrZVF8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" },
+    "https://images.unsplash.com/photo-1622569535114-bf7d4d57fe2d?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDN8NnNNVmpUTFNrZVF8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
   ];
 
 const CarSeperate = (props) => {
     const [cars, changeCar] = useState({relatedVideos: [], images: []})
     
     useEffect(async () => {
-        const token = await (await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"}))
-        const carss = await (await API.get(`cars/${props.id}`, {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
+        const token = localStorage.getItem("jwt")
+        const carss = await (await API.get(`cars/${props.id}`, {headers: {"Authorization": `Bearer ${token}`}})).data.data
         changeCar(carss)
         console.log(carss)
     }, [])

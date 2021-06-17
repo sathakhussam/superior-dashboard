@@ -34,8 +34,8 @@ const UsersSeperate = (props) => {
         "phone": ""
     })
     useEffect(async () => {
-        const token = await (await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"}))
-        const Users = await (await API.get(`users/find/${props.id}`, {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
+        const token = localStorage.getItem("jwt")
+        const Users = await (await API.get(`users/find/${props.id}`, {headers: {"Authorization": `Bearer ${token}`}})).data.data
         changeUser(Users)
         console.log(user.name)
     }, [])
