@@ -36,4 +36,11 @@
     justify-content: space-evenly;
     font-weight: 500;
   }
+  .OrdersPage div .Custom-card.custom-card.custom-card-searchby {
+    display: flex;
+    flex-direction: column;
+  }
+  .OrdersPage div .Custom-card.custom-card.custom-card-searchby input {
+    margin-top: 1rem;
+  }
 }

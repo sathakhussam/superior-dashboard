@@ -61,7 +61,7 @@
   font-size: 14px;
 }
 
-.LoginPage .errorBox {
+.errorBox {
   background-color: #ff949485;
   width: 100%;
   padding: 1rem;

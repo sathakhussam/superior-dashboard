@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import Card from '../../components/card/card.component'
 import API from '../../api/api'
-import { conforms } from 'lodash';
+import { Redirect } from 'react-router';
 
-const CarNewForm = () => {
+const CarNewForm = (props) => {
     const [files, setFiles] = useState([]);
-
+    const [msg, changeMsg] = useState("")
     const onFileUpload = (event) => {
         event.preventDefault();
         // Get the file Id
@@ -13,7 +13,7 @@ const CarNewForm = () => {
         // Create an instance of FileReader API
         // Get the actual file itself
         let file = event.target.files[0];
-        console.log(files)
+        // console.log(files)
         if (!files) setFiles([...files,file])
 
         setFiles([...files,file])
@@ -43,9 +43,8 @@ const CarNewForm = () => {
           }
         }
         const handleInputChange = (event) => {
-        //   event.persist();
+          event.persist();
           setInputs(inputs => ({...inputs, [event.target.name]: event.target.value}));
-          console.log(inputs)
         }
         return {
           handleSubmit,
@@ -55,27 +54,31 @@ const CarNewForm = () => {
 
         
         const myLastchance  = async (thevartopass) => {
-        let fd = new FormData();
-        console.log(files)
-        fd.append("name", thevartopass.carName)
-        fd.append("photos", files[0])
-        fd.append("photos", files[1])
-        fd.append("photos", files[2])
-        fd.append("description", thevartopass.description)
-        fd.append("KMIncluded", thevartopass.KMIncluded)
-        fd.append("preDeposit", thevartopass.preDeposit)
-        fd.append("hourlyRate", thevartopass.hourlyRate)
-        fd.append("perDayRate", thevartopass.perDayRate)
-        fd.append("contact", thevartopass.contact)
-        fd.append("whatsappNumber", thevartopass.whatsappNumber)
-        fd.append("type", thevartopass.type)
-        fd.append("brand", thevartopass.brand)
-        fd.append("relatedVideos", thevartopass.relatedVideos1)
-        fd.append("relatedVideos", thevartopass.relatedVideos2)
-        fd.append("relatedVideos", thevartopass.relatedVideos3)
-        const token = localStorage.getItem("jwt")
-        const res = (await API.patch("cars/", fd, {headers: {"Authorization": `Bearer ${token}`,'content-type': 'multipart/form-data'}}))
-        return res
+        try {            
+            let fd = new FormData();
+            console.log(files)
+            fd.append("name", thevartopass.carName)
+            fd.append("photos", files[0])
+            fd.append("photos", files[1])
+            fd.append("photos", files[2])
+            fd.append("description", thevartopass.description)
+            fd.append("KMIncluded", thevartopass.KMIncluded)
+            fd.append("preDeposit", thevartopass.preDeposit)
+            fd.append("hourlyRate", thevartopass.hourlyRate)
+            fd.append("perDayRate", thevartopass.perDayRate)
+            fd.append("contact", thevartopass.contact)
+            fd.append("whatsappNumber", thevartopass.whatsappNumber)
+            fd.append("type", thevartopass.type)
+            fd.append("brand", thevartopass.brand)
+            fd.append("relatedVideos", thevartopass.relatedVideos1)
+            fd.append("relatedVideos", thevartopass.relatedVideos2)
+            fd.append("relatedVideos", thevartopass.relatedVideos3)
+            const token = localStorage.getItem("jwt")
+            const res = (await API.patch("cars/", fd, {headers: {"Authorization": `Bearer ${token}`,'content-type': 'multipart/form-data'}}))
+            props.history.push("/cars")
+        } catch (e) {
+            changeMsg(e.response.data.message)
+        }
     }
 
     const myForm = useForms()
@@ -84,54 +87,16 @@ const CarNewForm = () => {
         let LastVar = {...myForm.inputs}
         LastVar["relatedVideos"] = [LastVar["relatedVideos1"],LastVar["relatedVideos2"], LastVar["relatedVideos3"]];
         LastVar["images"] = files
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log(LastVar)
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log("******************************************************")
-        console.log(myLastchance(LastVar))
-        myForm.handleInputChange({
-            carName: "",
-            description: "",
-            KMIncluded: "",
-            hourlyRate: "",
-            perDayRate: "",
-            preDeposit: "",
-            contact: "",
-            whatsappNumber: "",
-            type: "",
-            brand: "",
-            ratings: "",
-            relatedVideos1: "",
-            relatedVideos2: "",
-            relatedVideos3: "",
-
-        })
+        myLastchance(LastVar)
     }
     return ( 
     <div className="CarNewForm">
+            {msg 
+            ?
+            <div className="errorBox">{msg}</div>
+            : 
+            null}
         <Card>
-
             <form method="POST" onSubmit={customSubmit} encType="multipart/form-data">
             <h3>Create A New Form</h3>
             <input type="text" name="carName" onChange={myForm.handleInputChange} value={myForm.inputs.carName} required placeholder="Car Name" />
