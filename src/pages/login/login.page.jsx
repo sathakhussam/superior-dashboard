@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './login.styles.css'
 import { Link } from 'react-router-dom';
 import api from '../../api/api';
 
 const LoginPage = (props) => {
     const {handleSubmit, handleInputChange, inputs} = useForms()
+    useEffect(() => {
+      const type = props.match.params.type
+      if (type === 'n') {
+        const jwt = localStorage.getItem("jwt")
+        if (jwt) props.loginState.ChangeLogIn(true)
+      } else if (type == "l") {
+        props.loginState.ChangeLogIn(false)
+        localStorage.setItem("jwt", null)
+      }
+    }, [])
     return ( 
         <div className="LoginPage">
             <section>

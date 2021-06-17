@@ -1,5 +1,4 @@
 import {Switch, Route, Link, Redirect, useLocation} from 'react-router-dom'
-
 // Pages
 import Dashboard from "./pages/dashboard/dashboard.page"
 import OrdersPage from './pages/orders/orders.page'
@@ -50,23 +49,38 @@ function App() {
 
   let displaay = null
   const currurl = useLocation().pathname
-  if (currurl === '/login' && loggedIn.login === false) {
-    displaay = <Route exact path="/login" render={(props) => <LoginPage loginState={{loggedIn, ChangeLogIn}} {...props} />} />
+  console.log(loggedIn)
+  if ((currurl === "/n/login" || currurl === "/l/login") && loggedIn===false){
+    displaay = <Route exact path="/:type/login" render={(props) => <LoginPage loginState={{loggedIn, ChangeLogIn}} {...props} />} />
   }
-  else if (currurl === '/login' && loggedIn.login === false) {
+  else if ((currurl === "/n/login" || currurl === "/l/login") && loggedIn===true){
     displaay = <Redirect to="/" />
   }
-  else if (loggedIn.login === false) {
-    displaay = <Redirect to="/login" />
+  else if ((currurl === "/n/login" || currurl === "/l/login") && loggedIn===false) {
+    displaay = <Redirect to="/n/login" />
   }
-  else if (currurl === '/logout') {
-    console.log(loggedIn)
-    ChangeLogIn(false)
-    displaay = <Redirect to="/login" />
-  }
-  else {
+  else if (currurl == '/logout') {
+    displaay = <Redirect to="/l/login" />
+    // ChangeLogIn(false)
+  } 
+  else if (currurl != "/n/login" && loggedIn === true) {
     displaay = tobeReturn
   }
+  // if (currurl === '/login' && loggedIn.login === false) {
+  //   displaay = <Route exact path="/login" render={(props) => <LoginPage loginState={{loggedIn, ChangeLogIn}} {...props} />} />
+  // }
+  // else if (currurl === '/login' && loggedIn.login === false) {
+  // }
+  // else if (loggedIn.login === false) {
+  //   displaay = <Redirect to="/login" />
+  // }
+  // else if (currurl === '/logout') {
+  //   console.log(loggedIn)
+  //   ChangeLogIn(false)
+  //   displaay = <Redirect to="/login" />
+  // }
+  // else {
+  // }
   return (
     <div className="beforeApp">
       {
