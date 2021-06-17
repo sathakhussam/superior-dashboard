@@ -108,7 +108,7 @@ function TripleCharts(props) {
             </Card>
             <Card customClass="custom-card">
             <div id="chart">
-                <ReactApexChart options={myvar2.options} series={myvar3.series} type="bar" height={300} />
+                <ReactApexChart options={myvar3.options} series={myvar3.series} type="bar" height={300} />
             </div>
             </Card>
         </div>

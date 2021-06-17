@@ -2,7 +2,7 @@ const filterByDates = (preference, arrayToFilter, customDate) => {
     let datefrom;
     // let dateto;
     let cac;
-    console.log(customDate)
+    // console.log(customDate)
     
     if (preference === "day") {
       cac = new Date();
@@ -32,7 +32,7 @@ const filterByDates = (preference, arrayToFilter, customDate) => {
       tempTime1.splice(1, 0 , justNow)
       const finalTime = tempTime1.join("-")
       return arrayToFilter.filter(obj => {
-          console.log(new Date(obj.createdOn) > new Date(finalTime))
+          // console.log(new Date(obj.createdOn) > new Date(finalTime))
           if (new Date(obj.createdOn) > new Date(finalTime)) return obj
       })
     }

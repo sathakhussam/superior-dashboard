@@ -22,6 +22,7 @@ class Dashboard extends Component {
     super(props)
     
     this.state = {
+      choice: "year",
       MiniWidget: {
         totalRevenue: 0,
             totalOrders: 0,
@@ -45,13 +46,13 @@ class Dashboard extends Component {
       this.setState({token: token.data.token})
       const allOrders = await (await API.get("orders/", {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
       const allUsers = await (await API.get("users/", {headers: {"Authorization": `Bearer ${token.data.token}`}})).data.data
-      // console.log(allUsers)
-      // console.log(filterByDates("year",allOrders))
-      const filteredOrders = filterByDates("year", allOrders)
-      const newArr = await ordersHome(filterByDates("year", allOrders))
+
+      const filteredOrders = filterByDates(this.state.choice, allOrders)
+      const newArr = await ordersHome(filterByDates("week", allOrders), "week")
       const ArrOfBrands = await topSellingBrands(allOrders)
       const ArrOfCategory = await topSellingCategory(allOrders)
-      // const ArrOfCars = await topSellingCarsWithName(allOrders)
+      const ArrOfCars = await topSellingCarsWithName(allOrders)
+      console.log(ArrOfCars)
       this.setState({
         MiniWidget: {
           ...this.state.MiniWidget,
@@ -63,9 +64,8 @@ class Dashboard extends Component {
         salesChart: {labels: newArr["names"], values: newArr["value"]},
         brandsChart: ArrOfBrands,
         categoryChart: ArrOfCategory,
-        // carsChart: ArrOfCars,
+        carsChart: ArrOfCars,
       })
-      console.log(this.state)
       // const newArr = await topSellingCategory(filterByDates("year", allOrders))
       // const newArr = await topSellingBrands(filterByDates("year", allOrders))
       // console.log(newArr)

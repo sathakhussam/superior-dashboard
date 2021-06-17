@@ -1,4 +1,4 @@
-const ordersHome = (orders) => {
+const ordersHome = (orders, preference) => {
     const newOrders = orders.sort(function(a, b) {
         var keyA = new Date(a.createdOn),
           keyB = new Date(b.createdOn);
@@ -8,7 +8,7 @@ const ordersHome = (orders) => {
         return 0;
     })
 
-    let toReturn = filterByDates("year", newOrders, new Date())
+    let toReturn = filterByDates(preference, newOrders, new Date())
 
     return toReturn
 }
@@ -37,6 +37,7 @@ const filterByDates = (preference, arrayToFilter, cac) => {
       } else {
         myVar = parseInt(cac.getMonth()-(idx-1))
       }
+      myVar += 1
       const notDone = parseInt(cac.getMonth()-(idx-1))
       const myIDENT = arrayToFilter.filter(obj => {
         if (notDone < 0) {
@@ -58,6 +59,52 @@ const filterByDates = (preference, arrayToFilter, cac) => {
     ReturnArray["names"] = Name
     ReturnArray["value"] = Detail
 
+  }
+
+  if (preference == "week") {
+    datefrom = new Date()
+    const days = [0,0,0,0,0,0,0]
+    let toReturnValues;
+    let toReturnLabels = []
+    toReturnValues = (days.map((val, idx) => {
+      const newDay = new Date(`${datefrom.getMonth()+1}/${datefrom.getDate()-idx}/${datefrom.getFullYear()}`)
+      const newDayBefore = new Date(`${datefrom.getMonth()+1}/${idx == 0 ? datefrom.getDate() - 1 : datefrom.getDate()-idx+1}/${datefrom.getFullYear()}`)
+      toReturnLabels.push(`${datefrom.getMonth()+1}/${datefrom.getDate()-idx}/${datefrom.getFullYear()}`)
+      return arrayToFilter.filter((val) => {
+        if(newDay < new Date(val.createdOn) && newDayBefore > new Date(val.createdOn)) return val
+      })
+    }))
+    let valueToUse = toReturnValues.map(val => val.map(obj => parseFloat(obj.cost)))
+    valueToUse = valueToUse.map(val => val.length > 0 ? val.reduce((a,b) => a+b): val[0] ? val[0] : 0)
+    ReturnArray = {names: toReturnLabels, value: valueToUse}
+  }
+  if (preference == "month") {
+    datefrom = new Date()
+    const days = [0,0,0,0]
+    let toReturnValues;
+    let toReturnLabels = []
+    toReturnValues = (days.map((val, idx) => {
+      let newDay;
+      let newDayBefore;
+      // Checking if the days that we are subtracting are less than 0
+      if (datefrom.getDate()-(idx*7) <= 0) {
+        newDay = new Date(`${datefrom.getMonth()}/${30+(datefrom.getDate()-(idx*7))}/${datefrom.getFullYear()}`)}
+      // Subtract no of weeks
+      else newDay = new Date(`${datefrom.getMonth()+1}/${datefrom.getDate()-(idx*7)}/${datefrom.getFullYear()}`)
+      // A week before
+      if (datefrom.getDate()-((idx-1)*7) <= 0){
+         newDayBefore = new Date(`${datefrom.getMonth()}/${30+(datefrom.getDate()-((idx-1)*7))}/${datefrom.getFullYear()}`)}
+      else newDayBefore = new Date(`${datefrom.getMonth() + 1}/${(datefrom.getDate()-((idx-1)*7))}/${datefrom.getFullYear()}`)
+      // Label
+      toReturnLabels.push(`Week ${idx+1}`)
+      return arrayToFilter.filter((val) => {
+        if(newDay < new Date(val.createdOn) && newDayBefore > new Date(val.createdOn)) return val.cost
+      })
+    }))
+    let valueToUse = toReturnValues.map(val => val.map(obj => parseFloat(obj.cost)))
+    valueToUse = valueToUse.map(val => val.length > 0 ? val.reduce((a,b) => a+b): val[0] ? val[0] : 0)
+    ReturnArray = {names: toReturnLabels, value: valueToUse}
+    console.log(ReturnArray)
   }
 
   // eslint-disable-next-line array-callback-return
