@@ -30,7 +30,9 @@ const filterByDates = (preference, arrayToFilter, customDate) => {
       const justNow = (tempTime1[2])
       tempTime1.pop()
       tempTime1.splice(1, 0 , justNow)
+      tempTime1.reverse()
       const finalTime = tempTime1.join("-")
+      console.log(new Date(finalTime))
       return arrayToFilter.filter(obj => {
           // console.log(new Date(obj.createdOn) > new Date(finalTime))
           if (new Date(obj.createdOn) > new Date(finalTime)) return obj
