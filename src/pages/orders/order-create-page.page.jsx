@@ -4,11 +4,13 @@ import API from '../../api/api'
 
 const CarNewForm = (props) => {
         const [msg, changeMsg] = useState("")
+        const [infos, changeInfos] = useState({users: [{name: ""}], cars: [{name: ""}]})
         const useForms = () => {
         const [inputs, setInputs] = useState({
             carName: "",
             carImageUrl: "",
             car: "",
+            userEmail: "",
             user: "",
             userPhone: "",
             bookByDays: "",
@@ -35,6 +37,7 @@ const CarNewForm = (props) => {
                 fullInsurance: false,
             }
         });
+        console.log(inputs)
         const handleSubmit = async (event) => {
             try{
                 if (event) {
@@ -42,6 +45,7 @@ const CarNewForm = (props) => {
                   const myform = {
                       "car": inputs.car,
                       "numberOfHours": inputs.numberOfHours,
+                      "userEmail": inputs.userEmail,
                       "user": inputs.user,
                       "carName": inputs.carName,
                       "bookByDays": inputs.bookByDays,
@@ -77,6 +81,24 @@ const CarNewForm = (props) => {
                 changeMsg(e.response.data.message)
             }
         }
+        const customSelectHandle = (e) => {
+            const information = infos[e.target.name][e.target.value]
+            if (e.target.name === "cars") {
+                setInputs({
+                    ...inputs,
+                    carName: information.name,
+                    car: information["_id"],
+                    carImageUrl: information["images"][0],
+                })
+            } else if (e.target.name === "users") {
+                setInputs({
+                    ...inputs,
+                    user: information["_id"],
+                    userPhone: information["phone"],
+                    userEmail: information["email"],
+                })
+            }
+        }
         const handleInputChange = (event) => {
         //   event.persist();
           setInputs(inputs => ({...inputs, [event.target.name]: event.target.value}));
@@ -89,10 +111,19 @@ const CarNewForm = (props) => {
           handleSubmit,
           handleInputChange,
           insideInputChange,
-          inputs
+          inputs,
+          customSelectHandle
         }}
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(async () => {
+        const token = localStorage.getItem("jwt")
+        const allUsers = await (await API.get("users/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
+        const allCars = await (await API.get("cars/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
+        changeInfos({users: allUsers,cars: allCars.cars})
+    }, [])
         
+
     const myForm = useForms()
     return ( 
     <div className="CarNewForm">
@@ -103,15 +134,30 @@ const CarNewForm = (props) => {
         <Card>
             <form method="POST" onSubmit={myForm.handleSubmit} encType="multipart/form-data">
             <h3>Create A New Order</h3>
-            <input name="carName" value={myForm.inputs.carName} onChange={myForm.handleInputChange} type="text" required placeholder="Car Name" />
-            <input name="carImageUrl" value={myForm.inputs.carImageUrl} onChange={myForm.handleInputChange} type="text" required placeholder="Car Image URL" />
-            <input name="car" value={myForm.inputs.car} onChange={myForm.handleInputChange} type="text" required placeholder="Car ID" />
-            <input name="user" value={myForm.inputs.user} onChange={myForm.handleInputChange} type="text" required placeholder="User ID" />
-            <input name="userPhone" value={myForm.inputs.userPhone} onChange={myForm.handleInputChange} type="number" required placeholder="User Phone" />
+            <select name="method" name="cars" onChange={myForm.customSelectHandle}>
+                <option value="">Select The Car</option>
+                {
+                    infos.cars.map((val, idx) => {
+                        return (
+                            <option value={idx}>{val.name}</option>
+                        )
+                    })
+                }
+            </select>
+            <select name="method" name="users" onChange={myForm.customSelectHandle}>
+                <option value="">Select The User</option>
+                {
+                    infos.users.map((val, idx) => {
+                        return (
+                            <option value={idx}>{val.name} ({val.email})</option>
+                        )
+                    })
+                }
+            </select>
             <select name="bookByDays" value={myForm.inputs.bookByDays} onChange={myForm.handleInputChange} id="">
                 <option value="">Select How you want to book</option>
-                <option value={true}>True</option>
-                <option value={false}>False</option>
+                <option value={true}>Book by days</option>
+                <option value={false}>Book by hours</option>
             </select>
             <input name="pickUpDate" value={myForm.inputs.pickUpDate} onChange={myForm.handleInputChange} type="text" required placeholder="Pickup Date Ex: 10 May 2021" />
             <input name="pickUpTime" value={myForm.inputs.pickUpTime} onChange={myForm.handleInputChange} type="text" required placeholder="Pickup Time Ex: 10:20 PM" />

@@ -20,7 +20,7 @@ class CarsPage extends Component {
     }
 
     async componentDidMount() {
-        const token = await API.post("users/login", {"email": "admin@marthadark.ga", "password": "helloworld123"})
+        const token = localStorage.getItem("jwt")
         const allCars = await (await API.get("cars/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
         allCar = allCars.cars
 
