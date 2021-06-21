@@ -55,7 +55,7 @@ class Dashboard extends Component {
       const ArrOfBrands = await topSellingBrands(filteredOrders)
       const ArrOfCategory = await topSellingCategory(filteredOrders)
       const ArrOfCars = await topSellingCarsWithName(filteredOrders)
-      console.log(ArrOfCars)
+      // console.log(ArrOfCars)
       this.setState({
         MiniWidget: {
           ...this.state.MiniWidget,
@@ -85,7 +85,7 @@ class Dashboard extends Component {
       const ArrOfBrands = await topSellingBrands(filteredOrders)
       const ArrOfCategory = await topSellingCategory(filteredOrders)
       const ArrOfCars = await topSellingCarsWithName(filteredOrders)
-      console.log(ArrOfCars)
+      // console.log(ArrOfCars)
       this.setState({
         MiniWidget: {
           ...this.state.MiniWidget,
@@ -100,7 +100,7 @@ class Dashboard extends Component {
         carsChart: ArrOfCars,
       })
     } catch(e) {
-      console.log(e)
+      // console.log(e)
     }
     }
 

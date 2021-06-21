@@ -34,11 +34,11 @@ class CarsPage extends Component {
             // let myFilteredCars;
             // if ()
             let myFilteredCars = allCar.filter(val => val.name.toLowerCase().includes(this.state.searchName))
-            console.log(myFilteredCars)
+            // console.log(myFilteredCars)
             myFilteredCars = myFilteredCars.filter(val => val.type.toLowerCase().includes(this.state.searchType))
-            console.log(myFilteredCars)
+            // console.log(myFilteredCars)
             myFilteredCars = myFilteredCars.filter(val => val.brand.includes(this.state.searchBrand))
-            console.log(myFilteredCars)
+            // console.log(myFilteredCars)
             this.setState({
                 allCars: myFilteredCars
             })
@@ -111,7 +111,7 @@ class CarsPage extends Component {
                     <tbody>
                         {
                             this.state.allCars.map((car, idx) => {
-                            console.log("here")
+                            // console.log("here")
                             return <tr key={`carsid-${idx}`}>
                                 <td><Link to={`cars/${car["_id"]}`}>{car.name}</Link></td>
                                 <td>{car.type}</td>

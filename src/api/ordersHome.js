@@ -104,7 +104,7 @@ const filterByDates = (preference, arrayToFilter, cac) => {
     let valueToUse = toReturnValues.map(val => val.map(obj => parseFloat(obj.cost)))
     valueToUse = valueToUse.map(val => val.length > 0 ? val.reduce((a,b) => a+b): val[0] ? val[0] : 0)
     ReturnArray = {names: toReturnLabels, value: valueToUse}
-    console.log(ReturnArray)
+    // console.log(ReturnArray)
   }
 
   // eslint-disable-next-line array-callback-return

@@ -20,7 +20,7 @@ class OrdersPage extends Component {
         const token = localStorage.getItem("jwt")
         const allUsers = await (await API.get("coupons/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
         this.setState({allUsers: allUsers})
-        console.log(this.state.allUsers)
+        // console.log(this.state.allUsers)
     }
     
     handleValueChange = (e) => {

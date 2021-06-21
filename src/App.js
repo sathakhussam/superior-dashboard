@@ -50,7 +50,7 @@ function App() {
 
   let displaay = null
   const currurl = useLocation().pathname
-  console.log(loggedIn)
+  // console.log(loggedIn)
   if (currurl === "/l/login") {
     displaay = <Route exact path="/:type/login" render={(props) => <LoginPage loginState={{loggedIn, ChangeLogIn}} {...props} />} />
   }

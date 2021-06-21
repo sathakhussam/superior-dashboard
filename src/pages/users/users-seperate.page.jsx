@@ -42,7 +42,7 @@ const UsersSeperate = (props) => {
         const token = localStorage.getItem("jwt")
         const Users = await (await API.get(`users/find/${props.id}`, {headers: {"Authorization": `Bearer ${token}`}})).data.data
         changeUser(Users)
-        console.log(Object.values(user.documents).filter(val => val).length ? Object.keys(user.documents) : labels)
+        // console.log(Object.values(user.documents).filter(val => val).length ? Object.keys(user.documents) : labels)
     }, [])
     
     return(

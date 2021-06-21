@@ -12,7 +12,7 @@ const SeperateOrderPage = (props) => {
         const token = localStorage.getItem("jwt")
         const orders = await (await API.get(`orders/${props.id}`, {headers: {"Authorization": `Bearer ${token}`}})).data.data
         changeOrder(orders)
-        console.log(orders)
+        // console.log(orders)
     }, [])
     return ( 
         <div className="SeperateOrderPage">

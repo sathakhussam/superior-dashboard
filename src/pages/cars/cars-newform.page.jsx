@@ -56,7 +56,7 @@ const CarNewForm = (props) => {
         const myLastchance  = async (thevartopass) => {
         try {            
             let fd = new FormData();
-            console.log(files)
+            // console.log(files)
             fd.append("name", thevartopass.carName)
             fd.append("photos", files[0])
             fd.append("photos", files[1])

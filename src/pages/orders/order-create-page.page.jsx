@@ -37,7 +37,7 @@ const CarNewForm = (props) => {
                 fullInsurance: false,
             }
         });
-        console.log(inputs)
+        // console.log(inputs)
         const handleSubmit = async (event) => {
             try{
                 if (event) {

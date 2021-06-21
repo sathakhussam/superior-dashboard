@@ -16,7 +16,7 @@ const CarSeperate = (props) => {
     useEffect(async () => {
         const carss = await (await API.get(`cars/${props.id}`, {headers: {"Authorization": `Bearer ${token}`}})).data.data
         changeCar(carss)
-        console.log(carss)
+        // console.log(carss)
     }, [])
     
     const handleDelete = async () => {

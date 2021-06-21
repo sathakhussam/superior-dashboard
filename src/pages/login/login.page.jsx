@@ -5,7 +5,7 @@ import api from '../../api/api';
 import { parseString } from 'loader-utils';
 
 const LoginPage = (props) => {
-    console.log("Herrrrrreeeee")
+    // console.log("Herrrrrreeeee")
     const [msg, handleMsg] = useState(null)
     const {handleSubmit, handleInputChange, inputs} = useForms()
     useEffect(() => {
@@ -57,7 +57,7 @@ const useForms = (callback) => {
         event.preventDefault();
       }
       const token = await loginUser(inputs.email, inputs.password, errorHandle)
-      console.log("Here")
+      // console.log("Here")
       if (token != null) {
           loginState.ChangeLogIn(true)
           localStorage.setItem("jwt", token.data.token)
@@ -66,7 +66,7 @@ const useForms = (callback) => {
     }
     const handleInputChange = (event) => {
       event.persist();
-      console.log(event.target.value)
+      // console.log(event.target.value)
       setInputs(inputs => ({...inputs, [event.target.name]: event.target.value}));
     }
     return {

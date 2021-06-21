@@ -28,7 +28,7 @@ const filterByDates = (preference, arrayToFilter, customDate, customDateFrom) =>
     else if (preference === "custom") {
       const finalTime = convertDate(customDate)
       const finalTimeFrom = convertDate(customDateFrom)
-      console.log(new Date(finalTimeFrom), new Date(finalTime))
+      // console.log(new Date(finalTimeFrom), new Date(finalTime))
       return arrayToFilter.filter(obj => {
           // console.log(new Date(obj.createdOn) > new Date(finalTime))
           if (new Date(obj.createdOn) < new Date(finalTime) && new Date(obj.createdOn) > new Date(finalTimeFrom)) return obj
