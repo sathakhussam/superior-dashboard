@@ -72,10 +72,10 @@ class OrdersPage extends Component {
                     <thead>
                         <tr>
                         <th>Coupon Key</th>
-                        <th>Expired</th>
+                        <th>Used</th>
                         <th>Type</th>
                         <th>Value</th>
-                        <th>Used</th>
+                        <th>Used By UserID</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,7 +83,7 @@ class OrdersPage extends Component {
                             this.state.allUsers.map((user, idx) => {
                                 return <tr key={`users-idx-${idx}`}>
                                     <td>{user.key}</td>
-                                    <td>{`${user.expired}`}</td>
+                                    <td>{`${user.expired ? "Yes" : "No"}`}</td>
                                     <td>{user.type}</td>
                                     <td>{user.value}{user.type == 'fixed' ? ' AED' : "%"}</td>
                                     <td>{user.user}</td>

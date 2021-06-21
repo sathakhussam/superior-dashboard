@@ -14,6 +14,7 @@ class OrdersPage extends Component {
             searchDate: "",
             allOrderss: [],
             customDate: "2021-02-01",
+            customDate1: "2021-02-01",
         }
     }
 
@@ -26,7 +27,7 @@ class OrdersPage extends Component {
     handleValueChange = (e) => {
         this.setState({ [e.target.name]: e.target.value}, () => {
             let myFilteredCars;
-            if (this.state.searchDate == "custom") myFilteredCars = filterByDate(this.state.searchDate, this.state.allOrderss, this.state.customDate)
+            if (this.state.searchDate == "custom") myFilteredCars = filterByDate(this.state.searchDate, this.state.allOrderss, this.state.customDate, this.state.customDate1)
             else myFilteredCars = filterByDate(this.state.searchDate, this.state.allOrderss)
             this.setState({
                 allOrders: myFilteredCars
@@ -50,7 +51,10 @@ class OrdersPage extends Component {
                   </label>
                   {
                     this.state.searchDate == "custom" ?
-                    <input type="date" name="customDate" value={this.state.customDate} onChange={this.handleValueChange} id="" className="myowninput" />
+                    <div>
+                      From : <input type="date" name="customDate1" value={this.state.customDate1} onChange={this.handleValueChange} id="" className="myowninput" />
+                      To : <input type="date" name="customDate" value={this.state.customDate} onChange={this.handleValueChange} id="" className="myowninput" />
+                    </div>
                     :
                     null
                   }
@@ -77,12 +81,12 @@ class OrdersPage extends Component {
                         {
                             this.state.allOrders.map((val, idx) => {
                         return <tr key={`orders-id-${idx}`}>
-                            <td><Link to={`/orders/${val["_id"]}`}>{val["_id"].slice(0,5)}..</Link></td>
-                            <td>{val.customID}</td>
-                            <td>sathakhussam@gmail.com</td>
+                            <td><Link to={`/orders/${val["_id"]}`}>{val.customID}</Link></td>
+                            <td>{val.carName}</td>
+                            <td>{val.userEmail}</td>
                             <td>{val.bookByDays ? val.pickUpDate : "null"}</td>
                             <td>{val.bookByDays ? val.dropDate : "null"}</td>
-                            <td>{val.bookByDays ? "null" : val.noOfHours}</td>
+                            <td>{val.bookByDays ? "No" : val.noOfHours}</td>
                             <td>{val.cost} AED</td>
                         </tr>
                             })

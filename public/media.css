@@ -11,6 +11,22 @@
     width: 100%;
     margin-bottom: 1.5rem;
   }
+  .Dashboard .dateinputs {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+
+  .Dashboard .Custom-card.custom-card.custom-card-searchby {
+    flex-direction: column;
+  }
+
+  .Dashboard .Custom-card.custom-card.custom-card-searchby .myowninput {
+    display: block;
+    margin-left: 0;
+    margin-top: 10px;
+    width: 86.5%;
+  }
   .Dashboard .Mini-widget .Custom-card.component:last-child {
     margin-bottom: -0.5rem;
   }
@@ -42,5 +58,19 @@
   }
   .OrdersPage div .Custom-card.custom-card.custom-card-searchby input {
     margin-top: 1rem;
+  }
+
+  .CarSeperate .CustomCard .Row {
+    flex-direction: column;
+  }
+  .CarSeperate .CustomCard .second-part {
+    position: static;
+  }
+
+  .CarSeperate .Row .second-part .btn {
+    position: relative;
+    width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 }

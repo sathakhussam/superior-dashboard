@@ -64,7 +64,7 @@ const CarSeperate = (props) => {
                             </ul>
                         </p>
                     </div>
-                    <div>
+                    <div className="second-part">
                         <button className="btn btn-primary" onClick={handleDelete}>Delete this car</button>
                     </div>
                 </div>

@@ -59,6 +59,15 @@
   margin-bottom: 10px;
 }
 
+.CarSeperate .CustomCard .second-part {
+  position: relative;
+}
+
+.CarSeperate .second-part .btn {
+  position: absolute;
+  right: 0;
+}
+
 .CarSeperate li {
   margin-left: 2.5rem;
 }

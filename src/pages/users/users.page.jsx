@@ -64,8 +64,8 @@ class OrdersPage extends Component {
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td>{user.phone}</td>
-                                    <td>{user.billingDetail.country}</td>
-                                    <td>{user.billingDetail.pincode}</td>
+                                    <td>{user.billingDetail ? user.billingDetail.country ? user.billingDetail.country : "Not Defined" : "Not Defined"}</td>
+                                    <td>{user.billingDetail ? user.billingDetail.pincode ? user.billingDetail.pincode : "Not Defined" : "Not Defined"}</td>
                                 </tr>
                             })
                         }

@@ -24,6 +24,7 @@ class Dashboard extends Component {
     this.state = {
       choice: "year",
       date: "2021-02-01",
+      date1: "2021-02-01",
       allOrders: [],
       allUsers: [],
       MiniWidget: {
@@ -49,7 +50,7 @@ class Dashboard extends Component {
     }
 
     customChangeHandler = async () => {
-      const filteredOrders = filterByDates(this.state.choice, this.state.allOrders, this.state.date)
+      const filteredOrders = filterByDates(this.state.choice, this.state.allOrders, this.state.date, this.state.date1)
       const newArr = await ordersHome(filterByDates(this.state.choice == "custom" ? "year" : this.state.choice, this.state.allOrders), this.state.choice == "custom" ? "year" : this.state.choice)
       const ArrOfBrands = await topSellingBrands(filteredOrders)
       const ArrOfCategory = await topSellingCategory(filteredOrders)
@@ -118,7 +119,10 @@ class Dashboard extends Component {
                   </label>
                   {
                     this.state.choice == "custom" ?
-                    <input type="date" name="date" value={this.state.date} onChange={this.customChange} id="" className="myowninput" />
+                    <div>
+                      From : <input type="date" name="date1" value={this.state.date1} onChange={this.customChange} id="" className="myowninput" />
+                      To : <input type="date" name="date" value={this.state.date} onChange={this.customChange} id="" className="myowninput" />
+                    </div>
                     :
                     null
                   }

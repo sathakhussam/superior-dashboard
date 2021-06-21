@@ -1,5 +1,5 @@
 import {topSellingCarsWithName} from '../triplegraphs'
-import API from '../api'
+import api from '../api'
 
 const OrderHome = async (orders, from, to, brand, type) => {
     let newOrders = orders.sort(function(a, b) {
@@ -39,7 +39,7 @@ const OrderHome = async (orders, from, to, brand, type) => {
     // console.log(carNames)
     if (brand || type) {
         newOrders = await Promise.all(newOrders.map(async val => {
-            const car = await API.get(`cars/${val.car}`)
+            const car = await api.get(`cars/${val.car}`)
             // console.log(car.data.data)
             return {...val, brand: car.data.data.brand, type: car.data.data.type}
         }))
