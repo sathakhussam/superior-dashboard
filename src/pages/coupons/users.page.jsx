@@ -32,8 +32,8 @@ class OrdersPage extends Component {
         e.preventDefault()
         const token = localStorage.getItem("jwt")
         const allUsers = await (await API.post("coupons/", {type: this.state.searchType, value:this.state.searchName},{headers: {"Authorization": `Bearer ${token}`}})).data.data
-
-        this.setState({searchType: "", searchName: "", newCoupon: true}, () => setTimeout(this.setState({newCoupon: false}), 1000)) 
+        const allUser = await (await API.get("coupons/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
+        this.setState({allUsers: allUser, searchType: "", searchName: "", newCoupon: true}, () => setTimeout(this.setState({newCoupon: false}), 1000)) 
     }
 
     render() {
@@ -85,7 +85,7 @@ class OrdersPage extends Component {
                                     <td>{user.key}</td>
                                     <td>{`${user.expired}`}</td>
                                     <td>{user.type}</td>
-                                    <td>{user.value}</td>
+                                    <td>{user.value}{user.type == 'fixed' ? ' AED' : "%"}</td>
                                     <td>{user.user}</td>
                                 </tr>
                             })

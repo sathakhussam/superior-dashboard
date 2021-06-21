@@ -5,7 +5,7 @@ import ReactApexChart from 'react-apexcharts'
 const SalesChart = (props) => {
     let customVal = {
         series: [{
-            name: 'No Of Sales',
+            name: 'Total Revenue',
             data: props.values
           }],
           options: {

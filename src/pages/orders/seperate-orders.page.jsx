@@ -7,6 +7,7 @@ import API from '../../api/api'
 const SeperateOrderPage = (props) => {
     const [order, changeOrder] = useState({resources: {}})
     
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
         const token = localStorage.getItem("jwt")
         const orders = await (await API.get(`orders/${props.id}`, {headers: {"Authorization": `Bearer ${token}`}})).data.data
@@ -17,6 +18,7 @@ const SeperateOrderPage = (props) => {
         <div className="SeperateOrderPage">
             <Card>
             <h3>Orders Details</h3>                    
+            <p>OrderID : {order.customID}</p>
             <p>Car : <Link to={`/cars/${order.car}`}>{order.carName}</Link></p>
             <p>User : <Link to={`/users/${order.user}`}>Sathak Hussam</Link></p>
             <p>carID : <b>{order.car}</b></p>           

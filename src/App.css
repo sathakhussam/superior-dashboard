@@ -7,6 +7,10 @@
   display: flex;
 }
 
+body {
+  background-color: #242424;
+}
+
 .App .sidebar {
   display: flex;
   flex-direction: column;

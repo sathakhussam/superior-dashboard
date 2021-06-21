@@ -5,9 +5,12 @@ import Carousel from '../../components/carousel/carousel.component'
 import API from '../../api/api'
 
 const images = [
-    { url: "https://images.unsplash.com/photo-1622569535114-bf7d4d57fe2d?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDN8NnNNVmpUTFNrZVF8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" },
+    "https://images.unsplash.com/photo-1622569535114-bf7d4d57fe2d?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDN8NnNNVmpUTFNrZVF8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
  ];
 
+const labels = [
+    "documentFront"
+]
 
 const UsersSeperate = (props) => {
     const [user, changeUser] = useState({
@@ -28,16 +31,18 @@ const UsersSeperate = (props) => {
             "countryCode": "",
             "pinCode": ""
         },
+        "documents": {},
         "_id": "60c347707395d6740d42eb62",
         "name": "",
         "email": "",
         "phone": ""
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
         const token = localStorage.getItem("jwt")
         const Users = await (await API.get(`users/find/${props.id}`, {headers: {"Authorization": `Bearer ${token}`}})).data.data
         changeUser(Users)
-        console.log(user.name)
+        console.log(Object.values(user.documents).filter(val => val).length ? Object.keys(user.documents) : labels)
     }, [])
     
     return(
@@ -71,7 +76,7 @@ const UsersSeperate = (props) => {
                         <img src={user.imageUrl ? user.imageUrl : "https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"} alt="User Photo"/>
                     </div>
                 </div>
-                <Carousel images={user.documents ? user.documents : images}/>
+                <Carousel images={Object.values(user.documents).filter(val => val).length ? Object.values(user.documents).filter(val => val) :images} labels={Object.values(user.documents).filter(val => val).length ? Object.keys(user.documents) : labels}/>
 
             </Card>
         </div>
