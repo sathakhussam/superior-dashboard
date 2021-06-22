@@ -42,13 +42,14 @@ const CarNewForm = (props) => {
             try{
                 if (event) {
                   event.preventDefault();
-                  const myform = {
+                  let myform;
+                  if (Boolean(parseInt(myForm.inputs.bookByDays))) {
+                    myform = {
                       "car": inputs.car,
-                      "numberOfHours": inputs.numberOfHours,
                       "userEmail": inputs.userEmail,
                       "user": inputs.user,
                       "carName": inputs.carName,
-                      "bookByDays": inputs.bookByDays,
+                      "bookByDays": Boolean(parseInt(myForm.inputs.bookByDays)),
                       "dropTime": inputs.dropTime,
                       "dropDate": inputs.dropDate,
                       "method": inputs.method,
@@ -73,7 +74,40 @@ const CarNewForm = (props) => {
                           "Delivery Full Insurance": inputs.resources.fullInsurance,
                       }
                   }
+                }
+                else {
+                    myform = {
+                        "car": inputs.car,
+                        "numberOfHours": inputs.numberOfHours,
+                        "userEmail": inputs.userEmail,
+                        "user": inputs.user,
+                        "carName": inputs.carName,
+                        "bookByDays": Boolean(parseInt(myForm.inputs.bookByDays)),
+                        "method": inputs.method,
+                        "dropLocation": inputs.dropLocation,
+                        "pickUpLocation" : inputs.pickUpLocation,
+                        "pickUpTime": inputs.pickUpTime,
+                        "pickUpDate": inputs.pickUpDate,
+                        "depositAmount": inputs.depositAmount,
+                        "resourceCost": inputs.resourceCost,
+                        "subtotal": inputs.subtotal,
+                        "durationCost": inputs.durationCost,
+                        "VAT": inputs.VAT,
+                        "cost": inputs.cost,
+                        "carImages": inputs.carImageUrl,
+                        "userPhone": inputs.userPhone,
+                        "resources": {
+                            "Additional Driver": inputs.resources.additionalDriver,
+                            "Baby seat": inputs.resources.babySeat,
+                            "Outside Dubai": inputs.resources.deliveryOutsideDubai,
+                            "Extra 25KM": inputs.resources.extra25KM,
+                            "Extra 50KM": inputs.resources.extra50KM,
+                            "Delivery Full Insurance": inputs.resources.fullInsurance,
+                        }
+                    }
+                }
                   const token = localStorage.getItem("jwt")
+                  console.log(myform)
                   const res = await (await API.post("orders/", myform, {headers: {"Authorization": `Bearer ${token}`}}))    
                   props.history.push("/orders")
                 }
@@ -103,7 +137,7 @@ const CarNewForm = (props) => {
         //   event.persist();
           setInputs(inputs => ({...inputs, [event.target.name]: event.target.value}));
         }
-
+        
         const insideInputChange = (e) => {
             setInputs(inputs => ({...inputs, resources: {...inputs.resources, [e.target.name]: !inputs.resources[e.target.name]}}))
         }
@@ -156,14 +190,21 @@ const CarNewForm = (props) => {
             </select>
             <select name="bookByDays" value={myForm.inputs.bookByDays} onChange={myForm.handleInputChange} id="">
                 <option value="">Select How you want to book</option>
-                <option value={true}>Book by days</option>
-                <option value={false}>Book by hours</option>
+                <option value={1}>Book by days</option>
+                <option value={0}>Book by hours</option>
             </select>
             <input name="pickUpDate" value={myForm.inputs.pickUpDate} onChange={myForm.handleInputChange} type="text" required placeholder="Pickup Date Ex: 10 May 2021" />
             <input name="pickUpTime" value={myForm.inputs.pickUpTime} onChange={myForm.handleInputChange} type="text" required placeholder="Pickup Time Ex: 10:20 PM" />
-            <input name="dropDate" value={myForm.inputs.dropDate} onChange={myForm.handleInputChange} type="text" required placeholder="Drop Date Ex: 10 May 2021" />
-            <input name="dropTime" value={myForm.inputs.dropTime} onChange={myForm.handleInputChange} type="text" required placeholder="Drop Time Ex: 10:20 PM" />
-            <input name="numberOfHours" value={myForm.inputs.numberOfHours} onChange={myForm.handleInputChange} type="number" required placeholder="No Of Hours" />
+
+            {
+                Boolean(parseInt(myForm.inputs.bookByDays)) === true ?
+                <div>
+                    <input name="dropDate" value={myForm.inputs.dropDate} onChange={myForm.handleInputChange} type="text" required placeholder="Drop Date Ex: 10 May 2021" />
+                    <input name="dropTime" value={myForm.inputs.dropTime} onChange={myForm.handleInputChange} type="text" required placeholder="Drop Time Ex: 10:20 PM" />
+                </div>
+                :
+                <input name="numberOfHours" value={myForm.inputs.numberOfHours} onChange={myForm.handleInputChange} type="number" required placeholder="No Of Hours" />
+            }
             <input name="pickUpLocation" value={myForm.inputs.pickUpLocation} onChange={myForm.handleInputChange} type="text" required placeholder="Pickup Location" />
             <input name="dropLocation" value={myForm.inputs.dropLocation} onChange={myForm.handleInputChange} type="text" required placeholder="Drop Location" />
             <input name="cost" value={myForm.inputs.cost} onChange={myForm.handleInputChange} type="number" required placeholder="Cost" />
@@ -172,7 +213,7 @@ const CarNewForm = (props) => {
             <input name="resourceCost" value={myForm.inputs.resourceCost} onChange={myForm.handleInputChange} type="number" required placeholder="Resource Cost" />
             <input name="durationCost" value={myForm.inputs.durationCost} onChange={myForm.handleInputChange} type="number" required placeholder="Duration Cost" />
             <input name="depositAmount" value={myForm.inputs.depositAmount} onChange={myForm.handleInputChange} type="number" required placeholder="Deposit Amount" />
-            <select name="method" value={myForm.inputs.bookByDays} onChange={myForm.handleInputChange} id="">
+            <select name="method" value={myForm.inputs.method} onChange={myForm.handleInputChange} id="">
                 <option value="">Select Paymenth Method</option>
                 <option value="amex">Amex</option>
                 <option value="apple">Apple pay</option>

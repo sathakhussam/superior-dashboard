@@ -68,7 +68,7 @@ const filterByDates = (preference, arrayToFilter, cac) => {
     let toReturnLabels = []
     toReturnValues = (days.map((val, idx) => {
       const newDay = new Date(`${datefrom.getMonth()+1}/${datefrom.getDate()-idx}/${datefrom.getFullYear()}`)
-      const newDayBefore = new Date(`${datefrom.getMonth()+1}/${idx == 0 ? datefrom.getDate() - 1 : datefrom.getDate()-idx+1}/${datefrom.getFullYear()}`)
+      const newDayBefore = new Date(`${datefrom.getMonth()+1}/${idx == 0 ? datefrom.getDate() + 1 : datefrom.getDate()-idx+1}/${datefrom.getFullYear()}`)
       toReturnLabels.push(`${datefrom.getMonth()+1}/${datefrom.getDate()-idx}/${datefrom.getFullYear()}`)
       return arrayToFilter.filter((val) => {
         if(newDay < new Date(val.createdOn) && newDayBefore > new Date(val.createdOn)) return val

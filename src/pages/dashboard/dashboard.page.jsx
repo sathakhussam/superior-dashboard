@@ -55,7 +55,6 @@ class Dashboard extends Component {
       const ArrOfBrands = await topSellingBrands(filteredOrders)
       const ArrOfCategory = await topSellingCategory(filteredOrders)
       const ArrOfCars = await topSellingCarsWithName(filteredOrders)
-      // console.log(ArrOfCars)
       this.setState({
         MiniWidget: {
           ...this.state.MiniWidget,
@@ -70,18 +69,18 @@ class Dashboard extends Component {
         carsChart: ArrOfCars,
       })
     }
- 
+    
     async componentDidMount() {
       try {
-      const token = localStorage.getItem("jwt")
-      this.setState({token: token})
-      const allOrders = await (await API.get("orders/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
-      const allUsers = await (await API.get("users/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
-      this.setState({
-        allOrders,allUsers
-      })
-      const filteredOrders = filterByDates(this.state.choice, this.state.allOrders)
-      const newArr = await ordersHome(filterByDates("week", this.state.allOrders), "week")
+        const token = localStorage.getItem("jwt")
+        this.setState({token: token})
+        const allOrders = await (await API.get("orders/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
+        const allUsers = await (await API.get("users/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
+        this.setState({
+          allOrders,allUsers
+        })
+        const filteredOrders = filterByDates(this.state.choice, this.state.allOrders)
+        const newArr = await ordersHome(filterByDates("year", this.state.allOrders), "year")
       const ArrOfBrands = await topSellingBrands(filteredOrders)
       const ArrOfCategory = await topSellingCategory(filteredOrders)
       const ArrOfCars = await topSellingCarsWithName(filteredOrders)

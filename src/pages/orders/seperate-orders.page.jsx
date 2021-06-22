@@ -12,7 +12,6 @@ const SeperateOrderPage = (props) => {
         const token = localStorage.getItem("jwt")
         const orders = await (await API.get(`orders/${props.id}`, {headers: {"Authorization": `Bearer ${token}`}})).data.data
         changeOrder(orders)
-        // console.log(orders)
     }, [])
     return ( 
         <div className="SeperateOrderPage">
@@ -20,14 +19,21 @@ const SeperateOrderPage = (props) => {
             <h3>Orders Details</h3>                    
             <p>OrderID : {order.customID}</p>
             <p>Car : <Link to={`/cars/${order.car}`}>{order.carName}</Link></p>
-            <p>User : <Link to={`/users/${order.user}`}>Sathak Hussam</Link></p>
+            <p>User : <Link to={`/users/${order.user}`}>{order.userEmail}</Link></p>
             <p>carID : <b>{order.car}</b></p>           
             <p>userPhone : <b>{order.userPhone}</b></p>           
             <p>Pickup Time : <b>{order.pickUpTime}</b></p>           
             <p>Pickup Date : <b>{order.pickUpDate}</b></p>           
-            <p>Drop Time : <b>{order.dropTime}</b></p>           
-            <p>Drop Date : <b>{order.dropDate}</b></p>           
-            <p>No of hours : <b>{order.numberOfHours}</b></p>           
+            <p>Booked By : <b>{order.bookByDays ? "Days": "Hours"}</b></p>    
+            {
+                order.bookByDays ? 
+                <div>
+                    <p>Drop Time : <b>{order.dropTime}</b></p>           
+                    <p>Drop Date : <b>{order.dropDate}</b></p>           
+                </div>
+                :
+                <p>No of hours : <b>{order.numberOfHours}</b></p>           
+            }       
             <p>Pickup Location : <b>{order.pickUpLocation}</b></p>           
             <p>Drop Location : <b>{order.dropLocation}</b></p>           
             <p>Total Cost : <b>{order.cost} AED</b></p>           

@@ -86,7 +86,7 @@ class OrdersPage extends Component {
                             <td>{val.userEmail}</td>
                             <td>{val.bookByDays ? val.pickUpDate : "null"}</td>
                             <td>{val.bookByDays ? val.dropDate : "null"}</td>
-                            <td>{val.bookByDays ? "No" : val.noOfHours}</td>
+                            <td>{val.bookByDays ? "No" : val.numberOfHours}</td>
                             <td>{val.cost} AED</td>
                         </tr>
                             })

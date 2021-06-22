@@ -15,6 +15,7 @@ import Header from "./components/header/header.component"
 import CouponsPage from './pages/coupons/users.page'
 import './App.css';
 import { createContext, useContext, useState } from 'react'
+let currentPrevUrl = ''
 
 function App() {
   const [loggedIn, ChangeLogIn] = useState(false)
@@ -58,7 +59,7 @@ function App() {
     displaay = <Route exact path="/:type/login" render={(props) => <LoginPage loginState={{loggedIn, ChangeLogIn}} {...props} />} />
   }
   else if ((currurl === "/n/login" || currurl === "/l/login") && loggedIn===true){
-    displaay = <Redirect to={currurl == '/n/login' ? '/' : currurl} />
+    displaay = <Redirect to={currurl == '/n/login' ? currentPrevUrl : currurl} />
   }
   else if ((currurl === "/n/login" || currurl === "/l/login") && loggedIn===false) {
     displaay = <Redirect to="/n/login" />
@@ -69,10 +70,10 @@ function App() {
   } 
   else if (loggedIn === false) {
     displaay = <Redirect to="/n/login" />
+    currentPrevUrl = currurl
   }
   else {
     displaay = tobeReturn
-
   }
   // if (currurl === '/login' && loggedIn.login === false) {
   //   displaay = <Route exact path="/login" render={(props) => <LoginPage loginState={{loggedIn, ChangeLogIn}} {...props} />} />
