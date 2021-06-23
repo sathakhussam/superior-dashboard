@@ -35,7 +35,6 @@ const LoginPage = (props) => {
                     <input name="password" value={inputs.password} onChange={handleInputChange} type="password" placeholder="Password"/>
                     <button>Login</button>
                 </form>
-                <p>Forgot your password? <Link to="#">Click Here</Link></p>
             </section>
         </div>
      );
