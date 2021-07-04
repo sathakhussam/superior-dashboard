@@ -4,6 +4,7 @@ import API from '../../api/api'
 import { Redirect } from 'react-router';
 
 const CarNewForm = (props) => {
+    const [load, setLoad] = useState(false);
     const [files, setFiles] = useState([]);
     const [msg, changeMsg] = useState("")
     const onFileUpload = (event) => {
@@ -78,19 +79,21 @@ const CarNewForm = (props) => {
             props.history.push("/cars")
         } catch (e) {
             changeMsg(e.response.data.message)
+            setLoad(false)
         }
     }
 
     const myForm = useForms()
     const customSubmit = async (e) => {
         e.preventDefault()
+        setLoad(true)
         let LastVar = {...myForm.inputs}
         LastVar["relatedVideos"] = [LastVar["relatedVideos1"],LastVar["relatedVideos2"], LastVar["relatedVideos3"]];
         LastVar["images"] = files
         myLastchance(LastVar)
     }
     return ( 
-    <div className="CarNewForm">
+    <div className={`CarNewForm ${load? "noscroll": ""}`}>
             {msg 
             ?
             <div className="errorBox">{msg}</div>
@@ -148,9 +151,51 @@ const CarNewForm = (props) => {
                 <p className="styleClass" onClick={() => document.getElementById('getFile').click()}>Upload Image 3 Your Images</p>
                 <input type='file' onChange={onFileUpload} name="carName" id="getFile" />            
             </div>
+            <div className="fileupload">
+                <p className="styleClass" onClick={() => document.getElementById('getFile').click()}>Upload Image 4 Your Images</p>
+                <input type='file' onChange={onFileUpload} name="carName" id="getFile" />            
+            </div>
+            <div className="fileupload">
+                <p className="styleClass" onClick={() => document.getElementById('getFile').click()}>Upload Image 5 Your Images</p>
+                <input type='file' onChange={onFileUpload} name="carName" id="getFile" />            
+            </div>
+            <div className="fileupload">
+                <p className="styleClass" onClick={() => document.getElementById('getFile').click()}>Upload Image 6 Your Images</p>
+                <input type='file' onChange={onFileUpload} name="carName" id="getFile" />            
+            </div>
+            <div className="fileupload">
+                <p className="styleClass" onClick={() => document.getElementById('getFile').click()}>Upload Image 7 Your Images</p>
+                <input type='file' onChange={onFileUpload} name="carName" id="getFile" />            
+            </div>
+            <div className="fileupload">
+                <p className="styleClass" onClick={() => document.getElementById('getFile').click()}>Upload Image 8 Your Images</p>
+                <input type='file' onChange={onFileUpload} name="carName" id="getFile" />            
+            </div>
+            <div className="fileupload">
+                <p className="styleClass" onClick={() => document.getElementById('getFile').click()}>Upload Image 9 Your Images</p>
+                <input type='file' onChange={onFileUpload} name="carName" id="getFile" />            
+            </div>
+            <div className="fileupload">
+                <p className="styleClass" onClick={() => document.getElementById('getFile').click()}>Upload Image 10 Your Images</p>
+                <input type='file' onChange={onFileUpload} name="carName" id="getFile" />            
+            </div>
             <button>Create New</button>
             </form>
         </Card>
+        {
+            load ? 
+        <div className="overlay-box">
+            <div className="loader-box">
+                <div class="loading">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        : null
+        }
     </div> );
 }
 
