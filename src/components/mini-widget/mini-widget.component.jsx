@@ -8,7 +8,7 @@ function MiniWidget(props) {
     return (
         <div className="Mini-widget">
             <Card customClass="component">
-                <h3>{props.values.totalRevenue} AED</h3>
+                <h3>{(Math.floor(props.values.totalRevenue))} AED</h3>
                 <p>Total Revenue</p>
             </Card>
             <Card customClass="component">
