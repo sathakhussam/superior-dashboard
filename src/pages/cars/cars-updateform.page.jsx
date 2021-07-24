@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import Card from '../../components/card/card.component'
 import API from '../../api/api'
@@ -7,6 +9,23 @@ const CarNewForm = (props) => {
     const [load, setLoad] = useState(false);
     const [files, setFiles] = useState([]);
     const [msg, changeMsg] = useState("")
+    let carss = {
+        carName: "",
+        description: "",
+        KMIncluded: "",
+        hourlyRate: "",
+        perDayRate: "",
+        preDeposit: "",
+        contact: "",
+        whatsappNumber: "",
+        type: "",
+        brand: "",
+        ratings: "",
+        relatedVideos1: "",
+        relatedVideos2: "",
+        relatedVideos3: "",
+        published: ""
+    };
     const onFileUpload = (event) => {
         event.preventDefault();
         // Get the file Id
@@ -21,23 +40,7 @@ const CarNewForm = (props) => {
       }
 
     const useForms = () => {
-        const [inputs, setInputs] = useState({
-            carName: "",
-            description: "",
-            KMIncluded: "",
-            hourlyRate: "",
-            perDayRate: "",
-            preDeposit: "",
-            contact: "",
-            whatsappNumber: "",
-            type: "",
-            brand: "",
-            ratings: "",
-            relatedVideos1: "",
-            relatedVideos2: "",
-            relatedVideos3: "",
-
-        });
+        const [inputs, setInputs] = useState(carss);
         const handleSubmit = async (event, loginState) => {
           if (event) {
             event.preventDefault();
@@ -50,7 +53,8 @@ const CarNewForm = (props) => {
         return {
           handleSubmit,
           handleInputChange,
-          inputs
+          inputs,
+          setInputs
         }}
 
         
@@ -81,8 +85,10 @@ const CarNewForm = (props) => {
             fd.append("relatedVideos", thevartopass.relatedVideos1)
             fd.append("relatedVideos", thevartopass.relatedVideos2)
             fd.append("relatedVideos", thevartopass.relatedVideos3)
+            fd.append("published", Boolean(parseInt(thevartopass.published)))
+            
             const token = localStorage.getItem("jwt")
-            const res = (await API.patch("cars/", fd, {headers: {"Authorization": `Bearer ${token}`,'content-type': 'multipart/form-data'}}))
+            const res = (await API.post(`cars/${props.id}`, fd, {headers: {"Authorization": `Bearer ${token}`,'content-type': 'multipart/form-data'}}))
             props.history.push("/cars")
         } catch (e) {
             changeMsg(e.response.data.message)
@@ -99,6 +105,28 @@ const CarNewForm = (props) => {
         LastVar["images"] = files
         myLastchance(LastVar)
     }
+    const token = localStorage.getItem("jwt")
+    useEffect(async () => {
+        carss = await (await API.get(`cars/${props.id}`, {headers: {"Authorization": `Bearer ${token}`}})).data.data
+        myForm.setInputs(() => ({
+            carName: carss.name,
+            description: carss.description,
+            KMIncluded: carss.KMIncluded,
+            hourlyRate: carss.hourlyRate,
+            perDayRate: carss.perDayRate,
+            preDeposit: carss.preDeposit,
+            contact: carss.contact,
+            whatsappNumber: carss.whatsappNumber,
+            type: carss.type,
+            brand: carss.brand,
+            ratings: carss.ratings,
+            relatedVideos1: carss.relatedVideos[0],
+            relatedVideos2: carss.relatedVideos[1],
+            relatedVideos3: carss.relatedVideos[2],
+            published: carss.published === true ? "1" : "0" 
+        }));
+
+    }, [])
     return ( 
     <div className={`CarNewForm ${load? "noscroll": ""}`}>
             {msg 
@@ -118,6 +146,7 @@ const CarNewForm = (props) => {
             <input type="text" name="contact" onChange={myForm.handleInputChange} value={myForm.inputs.contact} required placeholder="Contact Number" />
             <input type="text" name="whatsappNumber" onChange={myForm.handleInputChange} value={myForm.inputs.whatsappNumber} required placeholder="Whatsapp Number" />
             <select name="type" value={myForm.inputs.type} onChange={myForm.handleInputChange} id="">
+                <option value="">Select A Car Type</option>
                 <option value="sports">Sports</option>
                 <option value="luxury">Luxury</option>
                 <option value="special">Special</option>
@@ -125,6 +154,7 @@ const CarNewForm = (props) => {
                 <option value="convertibles">Convertibles</option>
             </select>
             <select name="brand" value={myForm.inputs.brand} onChange={myForm.handleInputChange} id="">
+                <option value="">Select A Brand</option>
                 <option value="Ferrari">Ferrari</option>
                 <option value="Lamborghini">Lamborghini</option>
                 <option value="Ford">Ford</option>
@@ -186,6 +216,11 @@ const CarNewForm = (props) => {
                 <p className="styleClass" onClick={() => document.getElementById('getFile').click()}>Upload Image 10 Your Images</p>
                 <input type='file' onChange={onFileUpload} name="carName" id="getFile" />            
             </div>
+            <select name="published" value={myForm.inputs.published} onChange={myForm.handleInputChange} id="">
+                <option value="">Do You Want To Publish</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
             <button>Create New</button>
             </form>
         </Card>

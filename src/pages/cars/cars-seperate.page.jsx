@@ -21,7 +21,6 @@ const CarSeperate = (props) => {
     
     const handleDelete = async () => {
         try {
-            const carss = await (await API.delete(`cars/${props.id}`, {headers: {"Authorization": `Bearer ${token}`}})).data.data
             changeErr("redirect")
         } catch (e) {
             changeErr("error")
@@ -32,11 +31,11 @@ const CarSeperate = (props) => {
         <div className="CarSeperate">
             {
                 err == "error" ? 
-                <div className="errorBox">Sorry! Cannot Delete the car</div>: null
+                <div className="errorBox">Sorry! Can't Update the car</div>: null
             }
             {
                 err == "redirect" ? 
-                <Redirect to="/cars" />: null
+                <Redirect to={`/cars/${props.id}/update`} />: null
             }
             <Card customClass="CustomCard">
                 <div className="Row">
@@ -65,7 +64,7 @@ const CarSeperate = (props) => {
                         </p>
                     </div>
                     <div className="second-part">
-                        <button className="btn btn-primary" onClick={handleDelete}>Delete this car</button>
+                        <button className="btn btn-primary" onClick={handleDelete}>Update Car</button>
                     </div>
                 </div>
                 <Carousel images={cars.images.length > 1 ? cars.images :images}/>

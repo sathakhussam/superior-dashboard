@@ -36,7 +36,7 @@ const CarNewForm = (props) => {
             relatedVideos1: "",
             relatedVideos2: "",
             relatedVideos3: "",
-
+            published: ""
         });
         const handleSubmit = async (event, loginState) => {
           if (event) {
@@ -81,6 +81,7 @@ const CarNewForm = (props) => {
             fd.append("relatedVideos", thevartopass.relatedVideos1)
             fd.append("relatedVideos", thevartopass.relatedVideos2)
             fd.append("relatedVideos", thevartopass.relatedVideos3)
+            fd.append("published", Boolean(parseInt(thevartopass.published)))
             const token = localStorage.getItem("jwt")
             const res = (await API.patch("cars/", fd, {headers: {"Authorization": `Bearer ${token}`,'content-type': 'multipart/form-data'}}))
             props.history.push("/cars")
@@ -118,6 +119,7 @@ const CarNewForm = (props) => {
             <input type="text" name="contact" onChange={myForm.handleInputChange} value={myForm.inputs.contact} required placeholder="Contact Number" />
             <input type="text" name="whatsappNumber" onChange={myForm.handleInputChange} value={myForm.inputs.whatsappNumber} required placeholder="Whatsapp Number" />
             <select name="type" value={myForm.inputs.type} onChange={myForm.handleInputChange} id="">
+                <option value="">Select A Car Type</option>
                 <option value="sports">Sports</option>
                 <option value="luxury">Luxury</option>
                 <option value="special">Special</option>
@@ -125,6 +127,7 @@ const CarNewForm = (props) => {
                 <option value="convertibles">Convertibles</option>
             </select>
             <select name="brand" value={myForm.inputs.brand} onChange={myForm.handleInputChange} id="">
+                <option value="">Select A Brand</option>
                 <option value="Ferrari">Ferrari</option>
                 <option value="Lamborghini">Lamborghini</option>
                 <option value="Ford">Ford</option>
@@ -186,6 +189,11 @@ const CarNewForm = (props) => {
                 <p className="styleClass" onClick={() => document.getElementById('getFile').click()}>Upload Image 10 Your Images</p>
                 <input type='file' onChange={onFileUpload} name="carName" id="getFile" />            
             </div>
+            <select name="published" value={myForm.inputs.published} onChange={myForm.handleInputChange} id="">
+                <option value="">Do You Want To Publish</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
             <button>Create New</button>
             </form>
         </Card>

@@ -7,6 +7,7 @@ import SeperateOrdersPage from './pages/orders/seperate-orders.page'
 import CarsPage from './pages/cars/cars.page'
 import CarsNewPage from './pages/cars/cars-newform.page'
 import CarSeperatePage from './pages/cars/cars-seperate.page'
+import CarUpdatePage from './pages/cars/cars-updateform.page'
 import UsersPage from './pages/users/users.page'
 import UserSeperatePage from './pages/users/users-seperate.page'
 import LoginPage from './pages/login/login.page'
@@ -37,6 +38,7 @@ function App() {
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/cars" component={CarsPage} />
           <Route exact path="/cars/:id" render={(props) => <CarSeperatePage id={props.match.params.id} />} />
+          <Route exact path="/cars/:id/update" render={(props) => <CarUpdatePage id={props.match.params.id} />} />
           <Route exact path="/cars/create/new" render={(props) => <CarsNewPage {...props} />} />
           <Route exact path="/orders" component={OrdersPage} />
           <Route exact path="/orders/create/new" render={(props) => <OrdersCreatePage {...props} />} />
