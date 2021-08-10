@@ -81,6 +81,7 @@ const CarNewForm = (props) => {
             fd.append("contact", thevartopass.contact)
             fd.append("whatsappNumber", thevartopass.whatsappNumber)
             fd.append("type", thevartopass.type)
+            fd.append("ratings", thevartopass.ratings)
             fd.append("brand", thevartopass.brand)
             fd.append("relatedVideos", thevartopass.relatedVideos1)
             fd.append("relatedVideos", thevartopass.relatedVideos2)
@@ -89,6 +90,7 @@ const CarNewForm = (props) => {
             
             const token = localStorage.getItem("jwt")
             const res = (await API.post(`cars/${props.id}`, fd, {headers: {"Authorization": `Bearer ${token}`,'content-type': 'multipart/form-data'}}))
+            console.log(res)
             props.history.push("/cars")
         } catch (e) {
             changeMsg(e.response.data.message)
