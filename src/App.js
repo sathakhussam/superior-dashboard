@@ -11,6 +11,7 @@ import CarUpdatePage from './pages/cars/cars-updateform.page'
 import UsersPage from './pages/users/users.page'
 import UserSeperatePage from './pages/users/users-seperate.page'
 import LoginPage from './pages/login/login.page'
+import NotificationPage from './pages/notifications/users.page'
 // Components
 import Header from "./components/header/header.component"
 import CouponsPage from './pages/coupons/users.page'
@@ -30,6 +31,7 @@ function App() {
           <Link to="/cars">Cars</Link>
           <Link to="/users">Users</Link>
           <Link to="/coupons">Coupons</Link>
+          <Link to="/notifications">Notifications</Link>
         </div>
       </div>
       <div className="content">
@@ -47,6 +49,7 @@ function App() {
           <Route exact path="/users" component={UsersPage} />
           <Route exact path="/users/:id" render={(props) => <UserSeperatePage id={props.match.params.id} />} />
           <Route exact path="/coupons" component={CouponsPage} />
+          <Route exact path="/notifications" component={NotificationPage} />
       </Switch>
       </div>
     </div>)

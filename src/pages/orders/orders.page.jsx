@@ -62,7 +62,7 @@ class OrdersPage extends Component {
                 </div>
                 <Card customClass="custom-card">
                 <div className="top-div">
-                    <h3>All available users</h3>
+                    <h3>All available orders</h3>
                     <Link className="btn btn-primary" to="orders/create/new">Place Order</Link>
                 </div>
                 <table className="rtable">

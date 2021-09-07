@@ -240,3 +240,9 @@ span:nth-child(4) {
   background-color: #f5bb11;
   padding: 1rem;
 }
+
+.a-disabled {
+  color: #191919;
+  pointer-events: all !important;
+  cursor: not-allowed!important;
+}
