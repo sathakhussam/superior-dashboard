@@ -13,6 +13,7 @@ class OrdersPage extends Component {
             searchName: "",
             searchType: "",
             choseDate: "",
+            sendNotifications: "",
             datee: "",
             newCoupon: false,
         }
@@ -36,10 +37,18 @@ class OrdersPage extends Component {
         const token = localStorage.getItem("jwt")
         const datesep = this.state.datee.split("-")
         var allUsers;
-        if (this.state.choseDate == "false") allUsers = await (await API.post("coupons/", {type: this.state.searchType, value:this.state.searchName, isDate: false},{headers: {"Authorization": `Bearer ${token}`}})).data.data
-        if (this.state.choseDate == "true") allUsers = await (await API.post("coupons/", {type: this.state.searchType, value:this.state.searchName, isDate: true, "expiringOn": `${datesep[1]}-${datesep[2]}-${datesep[0]}`},{headers: {"Authorization": `Bearer ${token}`}})).data.data
-        const allUser = await (await API.get("coupons/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
-        this.setState({allUsers: allUser, searchType: "", searchName: "", newCoupon: true}, () => setTimeout(this.setState({newCoupon: false}), 1000)) 
+        var allUser;
+        if (this.state.choseDate == "false") allUser = await (await API.post("coupons/", {type: this.state.searchType, value:this.state.searchName, isDate: false},{headers: {"Authorization": `Bearer ${token}`}})).data.data
+        if (this.state.choseDate == "true") allUser = await (await API.post("coupons/", {type: this.state.searchType, value:this.state.searchName, isDate: true, "expiringOn": `${datesep[1]}-${datesep[2]}-${datesep[0]}`},{headers: {"Authorization": `Bearer ${token}`}})).data.data
+        allUsers = await (await API.get("coupons/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
+        if (this.state.sendNotifications == "yes") {
+            await (await API.post("/send",{
+                "title": "Use The New Coupon To Get A Discount",
+                "message": `${allUser.key} Use this Coupon For A Discount Of ${allUser.value}${allUser.type == 'fixed' ? ' AED' : "%"}`,
+                "to": "all",
+            },{headers: {"Authorization": `Bearer ${token}`}}))
+        }
+        this.setState({allUsers: allUsers, searchType: "", searchName: "",sendNotifications: "", datee: "", newCoupon: true}, () => setTimeout(this.setState({newCoupon: false}), 1000)) 
     }
     async ExpireToken(id, expired, idx) {
         const token = localStorage.getItem("jwt")
@@ -67,6 +76,15 @@ class OrdersPage extends Component {
                 <label>
                         Value Of Coupon
                         <input value={this.state.searchName} onChange={this.handleValueChange} placeholder="Enter The Value" type="number" name="searchName" id="" />
+                    </label>
+                    <label>
+                        <div className="Addspace"></div>
+                        Do You Want To Send A Notification
+                        <select value={this.state.sendNotifications} onChange={this.handleValueChange} name="sendNotifications" id="">
+                            <option value="">Select Option</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
                     </label>
                     <label>
                         <div className="Addspace"></div>

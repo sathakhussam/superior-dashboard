@@ -22,6 +22,9 @@ class OrdersPage extends Component {
     async componentDidMount() {
         const token = localStorage.getItem("jwt")
         const allUsers = await (await API.get("users/", {headers: {"Authorization": `Bearer ${token}`}})).data.data
+        allUsers.sort(function(a,b){
+            return a.email.localeCompare(b.email);
+        })
         this.setState({allUsers: allUsers})
         // console.log(this.state.allUsers)
     }
@@ -81,7 +84,7 @@ class OrdersPage extends Component {
                             }
                         </select>
                     </label>
-                    <button className="btn btn-primary">Create Coupon</button>
+                    <button className="btn btn-primary">Send Notifications</button>
                     </form>
                 </Card>
                 {

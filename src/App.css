@@ -246,3 +246,11 @@ span:nth-child(4) {
   pointer-events: all !important;
   cursor: not-allowed!important;
 }
+
+.myowninput {
+  width: auto!important;
+}
+
+.myowninput::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

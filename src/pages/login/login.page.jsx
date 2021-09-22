@@ -42,7 +42,7 @@ const LoginPage = (props) => {
 
 const loginUser = async (userName, password, errorHandle) => {
     try {
-      const token = await api.post("users/login", {"email": userName, "password": password})
+      const token = await api.post("users/login", {"email": userName, "password": password, "mobileToken": "Hello"})
       return token
     } catch(e) {
       errorHandle.handleMsg("The email or the password you have entered is incorrect")
