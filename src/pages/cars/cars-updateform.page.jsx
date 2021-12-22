@@ -172,6 +172,7 @@ const CarNewForm = (props) => {
                 <option value="Porsche">Porsche</option>
                 <option value="Lincoln">Lincoln</option>
                 <option value="Maseratti">Maseratti</option>
+                <option value="Mercedes">Mercedes</option>
                 <option value="Corvette">Corvette</option>
             </select>
             <input type="Number" name="ratings" onChange={myForm.handleInputChange} value={myForm.inputs.ratings} min="1" max="5" required placeholder="Ratings" />
